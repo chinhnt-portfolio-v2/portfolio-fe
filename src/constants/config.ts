@@ -1,0 +1,2 @@
+export const WS_RECONNECT_MAX_RETRIES = 3
+export const WS_BACKOFF_BASE_MS = 1000

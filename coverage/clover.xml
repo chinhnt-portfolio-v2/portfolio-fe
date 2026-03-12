@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1772632858712" clover="3.2.0">
+  <project timestamp="1772632858712" name="All files">
+    <metrics statements="34" coveredstatements="34" conditionals="7" coveredconditionals="7" methods="19" coveredmethods="19" elements="60" coveredelements="60" complexity="0" loc="34" ncloc="34" packages="2" files="10" classes="10"/>
+    <package name="lib">
+      <metrics statements="16" coveredstatements="16" conditionals="7" coveredconditionals="7" methods="3" coveredmethods="3"/>
+      <file name="formatDate.ts" path="I:\portfolio-v2\portfolio-fe\src\lib\formatDate.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="7" coveredconditionals="7" methods="1" coveredmethods="1"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="6" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="13" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+      <file name="referral.ts" path="I:\portfolio-v2\portfolio-fe\src\lib\referral.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+      </file>
+      <file name="utils.ts" path="I:\portfolio-v2\portfolio-fe\src\lib\utils.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="5" type="stmt"/>
+      </file>
+      <file name="validators.ts" path="I:\portfolio-v2\portfolio-fe\src\lib\validators.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="stores">
+      <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="16" coveredmethods="16"/>
+      <file name="galleryStore.ts" path="I:\portfolio-v2\portfolio-fe\src\stores\galleryStore.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+      </file>
+      <file name="languageStore.ts" path="I:\portfolio-v2\portfolio-fe\src\stores\languageStore.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+      </file>
+      <file name="metricsStore.ts" path="I:\portfolio-v2\portfolio-fe\src\stores\metricsStore.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+      </file>
+      <file name="referralStore.ts" path="I:\portfolio-v2\portfolio-fe\src\stores\referralStore.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+      </file>
+      <file name="themeStore.ts" path="I:\portfolio-v2\portfolio-fe\src\stores\themeStore.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+      </file>
+      <file name="visitorStore.ts" path="I:\portfolio-v2\portfolio-fe\src\stores\visitorStore.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

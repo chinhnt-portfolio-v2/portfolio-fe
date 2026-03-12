@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "eyebrow": "⚡ Backend · Fullstack",
+    "headingPrefix": "Building systems",
+    "headingHighlight": "that stay live.",
+    "tagline": "Fullstack engineer focused on production-grade systems — not just demos. Every project ships with real infrastructure, CI/CD, and live observability.",
+    "cta": {
+      "evidence": "See the evidence",
+      "contact": "Get in touch"
+    }
+  },
+  "projects": {
+    "heading": "Projects",
+    "filter": {
+      "all": "All",
+      "featured": "Featured"
+    },
+    "emptyState": {
+      "message": "No projects match this filter.",
+      "reset": "Reset filter →"
+    }
+  },
+  "about": {
+    "heading": "Why Hire Me",
+    "whyHireMe": "I build systems that are meant to stay running — not just demos that survive a presentation. My engineering philosophy is to make the invisible visible: instrumentation, CI/CD guardrails, and honest documentation of every architectural decision, including the wrong ones. I treat each project as a production system from day one, which means you get a developer who ships, monitors, and improves — not one who hands off and moves on.",
+    "skills": {
+      "heading": "Verified Skills"
+    },
+    "availability": {
+      "heading": "Availability",
+      "open": "Open to Work",
+      "selective": "Selectively Looking",
+      "unavailable": "Not Available",
+      "location": "Remote · Ho Chi Minh City"
+    }
+  },
+  "projectDetail": {
+    "notFound": "Project not found.",
+    "backToGallery": "← Back to gallery",
+    "viewLive": "View live ↗",
+    "viewLiveSoon": "Live soon",
+    "viewLiveAriaLabel": "Live deployment not yet available",
+    "viewGitHub": "View on GitHub ↗",
+    "buildTimeline": "Build Timeline",
+    "lessonsLearned": "What I'd do differently"
+  }
+}

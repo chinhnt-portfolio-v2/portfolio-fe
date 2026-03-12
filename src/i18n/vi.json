@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "projects": "Dự án",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ"
+  },
+  "hero": {
+    "eyebrow": "⚡ Backend · Fullstack",
+    "headingPrefix": "Xây dựng hệ thống",
+    "headingHighlight": "vận hành ổn định.",
+    "tagline": "Kỹ sư fullstack chuyên xây dựng hệ thống production-grade — không chỉ là demo. Mỗi dự án đều có infrastructure thực, CI/CD, và observability trực tiếp.",
+    "cta": {
+      "evidence": "Xem dự án",
+      "contact": "Liên hệ"
+    }
+  },
+  "projects": {
+    "heading": "Dự Án",
+    "filter": {
+      "all": "Tất cả",
+      "featured": "Nổi bật"
+    },
+    "emptyState": {
+      "message": "Không có dự án phù hợp với bộ lọc này.",
+      "reset": "Xoá bộ lọc →"
+    }
+  },
+  "about": {
+    "heading": "Tại Sao Chọn Tôi",
+    "whyHireMe": "Tôi xây dựng hệ thống để chạy bền vững — không chỉ là demo sống sót qua một buổi thuyết trình. Triết lý kỹ thuật của tôi là làm cho điều vô hình trở nên hiển thị: instrumentation, CI/CD guardrails, và tài liệu trung thực về mọi quyết định kiến trúc, kể cả những quyết định sai. Tôi coi mỗi dự án là hệ thống production ngay từ ngày đầu tiên — bạn có được một developer vừa ship, vừa monitor, vừa cải thiện liên tục.",
+    "skills": {
+      "heading": "Kỹ Năng Đã Được Chứng Minh"
+    },
+    "availability": {
+      "heading": "Tình Trạng Tuyển Dụng",
+      "open": "Sẵn Sàng Làm Việc",
+      "selective": "Đang Xem Xét",
+      "unavailable": "Không Nhận",
+      "location": "Remote · Hồ Chí Minh"
+    }
+  },
+  "projectDetail": {
+    "notFound": "Không tìm thấy dự án.",
+    "backToGallery": "← Quay lại danh sách",
+    "viewLive": "Xem live ↗",
+    "viewLiveSoon": "Sắp ra mắt",
+    "viewLiveAriaLabel": "Chưa có bản triển khai live",
+    "viewGitHub": "Xem trên GitHub ↗",
+    "buildTimeline": "Lịch Sử Phát Triển",
+    "lessonsLearned": "Nếu làm lại, tôi sẽ..."
+  }
+}
