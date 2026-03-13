@@ -6,7 +6,7 @@ import { useMetricsStore } from '@/stores/metricsStore'
 export const useWebSocket = () => {
   const wsRef = useRef<WebSocket | null>(null)
   const reconnectAttemptsRef = useRef(0)
-  const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout>>()
+  const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const setMetrics = useMetricsStore((state) => state.setMetrics)
   const setConnectionState = useMetricsStore((state) => state.setConnectionState)
