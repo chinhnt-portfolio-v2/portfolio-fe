@@ -7,7 +7,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { MetricPair } from './MetricPair'
 import { StatusIndicator } from './StatusIndicator'
 import { SPRING_GENTLE } from '@/constants/motion'
+import { formatRelativeTime } from '@/lib/formatDate'
 import { cn } from '@/lib/utils'
+import { useMetricsStore } from '@/stores/metricsStore'
 
 interface ProjectCardProps {
   slug: string
@@ -40,6 +42,18 @@ export function ProjectCard({
   const isInView = useInView(ref, { once: true, amount: 0.15 })
   const navigate = useNavigate()
 
+  // WebSocket metrics integration
+  const liveMetrics = useMetricsStore((state) => state.metrics[slug])
+  const connectionState = useMetricsStore((state) => state.connectionState)
+  const getProjectStatus = useMetricsStore((state) => state.getProjectStatus)
+
+  const projectStatus = getProjectStatus(slug)
+
+  // Format timestamp for display - show "Updated X ago" when stale (AC5)
+  const staleDisplay = projectStatus === 'stale' && liveMetrics?.lastUpdated
+    ? `Updated ${formatRelativeTime(liveMetrics.lastUpdated)}`
+    : null
+
   return (
     <motion.article
       ref={ref}
@@ -66,7 +80,7 @@ export function ProjectCard({
       {/* Description */}
       <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">{description}</p>
 
-      {/* Metrics row */}
+      {/* Metrics row - static metrics */}
       {(metrics?.shipDays !== undefined || metrics?.uptimeDays !== undefined) && (
         <div className="mb-4 flex gap-6">
           {metrics.shipDays !== undefined && (
@@ -74,6 +88,24 @@ export function ProjectCard({
           )}
           {metrics.uptimeDays !== undefined && (
             <MetricPair value={metrics.uptimeDays} label="days uptime" />
+          )}
+        </div>
+      )}
+
+      {/* Live WebSocket metrics row - hidden when status is 'hidden' (AC1: > 24h = hide entirely) */}
+      {connectionState !== 'connecting' && projectStatus !== 'hidden' && (
+        <div className="mb-4 flex gap-6">
+          {projectStatus === 'live' && liveMetrics?.uptime !== undefined && (
+            <MetricPair value={liveMetrics.uptime} label="uptime %" suffix="%" />
+          )}
+          {projectStatus === 'live' && liveMetrics?.responseTime !== undefined && (
+            <MetricPair value={liveMetrics.responseTime} label="ms" />
+          )}
+          {projectStatus === 'stale' && staleDisplay && (
+            <span className="text-xs text-muted-foreground">{staleDisplay}</span>
+          )}
+          {projectStatus === 'unavailable' && !liveMetrics?.hasReceivedData && (
+            <span className="text-xs text-muted-foreground">Status unavailable</span>
           )}
         </div>
       )}

@@ -37,6 +37,11 @@
       "selective": "Đang Xem Xét",
       "unavailable": "Không Nhận",
       "location": "Remote · Hồ Chí Minh"
+    },
+    "githubContributions": {
+      "label": "Đóng góp GitHub",
+      "contributions": "đóng góp",
+      "loading": "Đang tải đóng góp..."
     }
   },
   "projectDetail": {

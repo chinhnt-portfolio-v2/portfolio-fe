@@ -4,6 +4,7 @@ import { AnimatePresence, MotionConfig } from 'framer-motion'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 import { PageTransition } from '@/components/layout/PageTransition'
+import { useWebSocket } from '@/hooks/useWebSocket'
 import i18n from '@/i18n'
 import { detectInitialLanguage } from '@/lib/referral'
 import HomePage from '@/pages/HomePage'
@@ -47,6 +48,9 @@ function AppRoutes() {
 export default function App() {
   const { theme } = useThemeStore()
   const { setLanguage } = useLanguageStore()
+
+  // Initialize WebSocket connection for live metrics
+  useWebSocket()
 
   // Sync theme store → HTML root class for CSS dark mode variables
   useEffect(() => {

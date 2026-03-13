@@ -37,6 +37,11 @@
       "selective": "Selectively Looking",
       "unavailable": "Not Available",
       "location": "Remote · Ho Chi Minh City"
+    },
+    "githubContributions": {
+      "label": "GitHub contributions",
+      "contributions": "contributions",
+      "loading": "Loading contributions..."
     }
   },
   "projectDetail": {

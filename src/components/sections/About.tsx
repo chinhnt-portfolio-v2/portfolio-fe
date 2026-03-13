@@ -3,8 +3,10 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 
+import { GitHubGraph } from '@/components/shared/GitHubGraph'
 import { Badge } from '@/components/ui/badge'
 import { STATUS_COLOR, aboutContent } from '@/constants/about'
+import { GITHUB_USERNAME } from '@/constants/config'
 import { SPRING_GENTLE } from '@/constants/motion'
 import { projects } from '@/constants/projects'
 
@@ -92,6 +94,11 @@ export function About() {
               <span className="text-muted-foreground text-sm">{t('about.availability.location')}</span>
             </div>
           </div>
+        </RevealBlock>
+
+        {/* GitHub Contributions - Live Evidence */}
+        <RevealBlock delay={0.15}>
+          <GitHubGraph username={GITHUB_USERNAME} />
         </RevealBlock>
       </div>
     </section>

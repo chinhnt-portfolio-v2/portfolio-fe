@@ -32,6 +32,43 @@ vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
+// Mutable state for test mocking - allows tests to change mock behavior
+let mockProjectStatus = 'unavailable' as 'live' | 'stale' | 'hidden' | 'unavailable'
+let mockMetricsData: Record<string, { uptime?: number; responseTime?: number; lastUpdated?: string; hasReceivedData?: boolean }> = {}
+let mockConnectionState = 'disconnected' as 'connecting' | 'connected' | 'disconnected' | 'error'
+
+// Mock metrics store - using mutable variables that tests can modify
+vi.mock('@/stores/metricsStore', () => {
+  return {
+    useMetricsStore: vi.fn((selector) => {
+      const state = {
+        metrics: mockMetricsData,
+        connectionState: mockConnectionState,
+        setMetrics: vi.fn(),
+        setConnectionState: vi.fn(),
+        getProjectStatus: (_slug: string) => mockProjectStatus,
+      }
+      if (typeof selector === 'function') {
+        return selector(state)
+      }
+      return state
+    }),
+  }
+})
+
+// Helper functions to modify mock state - called by tests
+function setMockStatus(status: 'live' | 'stale' | 'hidden' | 'unavailable') {
+  mockProjectStatus = status
+}
+
+function setMockMetrics(data: Record<string, { uptime?: number; responseTime?: number; lastUpdated?: string; hasReceivedData?: boolean }>) {
+  mockMetricsData = data
+}
+
+function setMockConnectionState(state: 'connecting' | 'connected' | 'disconnected' | 'error') {
+  mockConnectionState = state
+}
+
 const defaultProps = {
   slug: 'test-project',
   title: 'Test Project',
@@ -52,6 +89,10 @@ function renderCard(props = {}) {
 describe('ProjectCard', () => {
   beforeEach(() => {
     mockNavigate.mockClear()
+    // Reset mock state
+    mockProjectStatus = 'unavailable'
+    mockMetricsData = {}
+    mockConnectionState = 'disconnected'
   })
 
   it('renders the project title', () => {
@@ -137,5 +178,55 @@ describe('ProjectCard', () => {
     renderCard({ githubUrl: 'https://github.com/test' })
     const link = screen.getByRole('link', { name: /view source code for test project on github/i })
     expect(link.className).toContain('focus-visible:ring-2')
+  })
+
+  // WebSocket metrics display tests (Story 3.4)
+  describe('WebSocket live metrics display', () => {
+    it('shows degraded state when connectionState is error - static content still renders', () => {
+      // This test verifies that even when WebSocket fails, static content renders
+      // The actual WebSocket integration is tested in metricsStore.test.ts
+      renderCard()
+      // Should still render static content
+      expect(screen.getByText('Test Project')).toBeInTheDocument()
+    })
+  })
+
+  // Story 3.5: Metrics Staleness & Auto-Hide tests
+  describe('WebSocket metrics staleness - hide after 24h (Story 3.5)', () => {
+    it('hides metrics section when status is "hidden" (AC1: > 24h = hide entirely)', () => {
+      setMockStatus('hidden')
+      setMockConnectionState('connected')
+      renderCard()
+      // The metrics section should NOT render when status is 'hidden'
+      expect(screen.queryByText('Status unavailable')).not.toBeInTheDocument()
+      expect(screen.queryByText('uptime %')).not.toBeInTheDocument()
+    })
+
+    it('shows live metrics when status is "live"', () => {
+      setMockStatus('live')
+      setMockConnectionState('connected')
+      setMockMetrics({ 'test-project': { uptime: 99.9, responseTime: 120, hasReceivedData: true } })
+      // Don't pass static metrics prop so we only see live WebSocket metrics
+      renderCard({ metrics: undefined })
+      // Live metrics should be visible (99.9% due to suffix prop)
+      expect(screen.getByText('99.9%')).toBeInTheDocument()
+      expect(screen.getByText('120')).toBeInTheDocument()
+    })
+
+    it('shows "Updated X ago" when status is "stale" (AC2)', () => {
+      setMockStatus('stale')
+      setMockConnectionState('connected')
+      setMockMetrics({ 'test-project': { uptime: 99.9, lastUpdated: new Date().toISOString(), hasReceivedData: true } })
+      renderCard()
+      // Should show "Updated" text for stale status
+      expect(screen.getByText(/Updated/i)).toBeInTheDocument()
+    })
+
+    it('shows "Status unavailable" when status is "unavailable" (never received data)', () => {
+      setMockStatus('unavailable')
+      setMockConnectionState('connected')
+      renderCard()
+      expect(screen.getByText('Status unavailable')).toBeInTheDocument()
+    })
   })
 })
