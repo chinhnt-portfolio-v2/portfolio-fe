@@ -1,5 +1,7 @@
 {
   "rewrites": [
+    { "source": "/api/v1/(.*)", "destination": "https://portfolio-platform-1095331155372.asia-southeast1.run.app/api/v1/$1" },
+    { "source": "/ws/(.*)", "destination": "https://portfolio-platform-1095331155372.asia-southeast1.run.app/ws/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
