@@ -15,14 +15,16 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'https://portfolio-platform-1095331155372.asia-southeast1.run.app',
         changeOrigin: true,
+        secure: true,
       },
       '/ws': {
-        target: 'ws://localhost:8080',
+        target: 'wss://portfolio-platform-1095331155372.asia-southeast1.run.app',
         ws: true,
         changeOrigin: true,
         rewriteWsOrigin: true,
+        secure: true,
       },
     },
   },
