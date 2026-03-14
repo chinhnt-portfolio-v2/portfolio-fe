@@ -26,10 +26,10 @@ export const useWebSocket = () => {
       ws.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data)
-          // Expected format from BE: { projectSlug, status, uptime, responseTime, lastDeploy }
+          // Expected format from BE: { projectSlug, status, uptimePercent, responseTimeMs, lastDeployAt, lastPolledAt }
           setMetrics(data.projectSlug, {
-            uptime: data.uptime,
-            responseTime: data.responseTime,
+            uptime: data.uptimePercent,
+            responseTime: data.responseTimeMs,
             // Add timestamp for staleness tracking
             lastUpdated: new Date().toISOString(),
             hasReceivedData: true,
