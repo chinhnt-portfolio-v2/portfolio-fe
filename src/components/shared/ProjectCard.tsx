@@ -10,6 +10,7 @@ import { SPRING_GENTLE } from '@/constants/motion'
 import { formatRelativeTime } from '@/lib/formatDate'
 import { cn } from '@/lib/utils'
 import { useMetricsStore } from '@/stores/metricsStore'
+import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
 
 interface ProjectCardProps {
   slug: string
@@ -42,12 +43,23 @@ export function ProjectCard({
   const isInView = useInView(ref, { once: true, amount: 0.15 })
   const navigate = useNavigate()
 
+  // Return visitor tracking
+  const setLastViewedSlug = useReturnVisitorStore((state) => state.setLastViewedSlug)
+  const updateTimestamp = useReturnVisitorStore((state) => state.updateTimestamp)
+
   // WebSocket metrics integration
   const liveMetrics = useMetricsStore((state) => state.metrics[slug])
   const connectionState = useMetricsStore((state) => state.connectionState)
   const getProjectStatus = useMetricsStore((state) => state.getProjectStatus)
 
   const projectStatus = getProjectStatus(slug)
+
+  // Handle card click - track as last viewed project
+  const handleCardClick = () => {
+    setLastViewedSlug(slug)
+    updateTimestamp()
+    navigate(`/projects/${slug}`)
+  }
 
   // Format timestamp for display - show "Updated X ago" when stale (AC5)
   const staleDisplay = projectStatus === 'stale' && liveMetrics?.lastUpdated
@@ -62,7 +74,7 @@ export function ProjectCard({
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
       transition={{ ...SPRING_GENTLE, delay: index * 0.05 }}
       whileHover={{ y: -2, transition: SPRING_GENTLE }}
-      onClick={() => navigate(`/projects/${slug}`)}
+      onClick={handleCardClick}
       className={cn(
         'group relative flex cursor-pointer flex-col rounded-2xl border border-white/10 bg-bg-card p-7',
         'shadow-[0_0_0px_rgba(168,85,247,0)] transition-shadow duration-200',

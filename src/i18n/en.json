@@ -12,6 +12,16 @@
     "cta": {
       "evidence": "See the evidence",
       "contact": "Get in touch"
+    },
+    "context": {
+      "linkedin": {
+        "eyebrow": "⚡ Backend · Fullstack · Open to Work",
+        "tagline": "Experienced fullstack engineer with production-grade expertise. Browse my projects to see real systems I've built and deployed."
+      },
+      "cv-vn": {
+        "eyebrow": "⚡ Backend · Fullstack · Sẵn Sàng Làm Việc",
+        "tagline": "Kỹ sư fullstack kinh nghiệm với chuyên môn production-grade. Xem các dự án tôi đã xây dựng và triển khai."
+      }
     }
   },
   "projects": {
@@ -53,5 +63,11 @@
     "viewGitHub": "View on GitHub ↗",
     "buildTimeline": "Build Timeline",
     "lessonsLearned": "What I'd do differently"
+  },
+  "returnVisitor": {
+    "banner": {
+      "welcomeBack": "Welcome back — continue where you left off",
+      "dismiss": "Dismiss"
+    }
   }
 }

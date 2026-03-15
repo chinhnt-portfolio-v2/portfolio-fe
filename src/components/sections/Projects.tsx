@@ -8,14 +8,21 @@ import { ProjectCard } from '@/components/shared/ProjectCard'
 import { SPRING_GENTLE } from '@/constants/motion'
 import { projects } from '@/constants/projects'
 import { useGalleryStore } from '@/stores/galleryStore'
+import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
 
-function getInitialFilter(): string | null {
+function getInitialFilter(returnVisitorTab: string | null): string | null {
   const params = new URLSearchParams(window.location.search)
   const urlFilter = params.get('filter')
   if (urlFilter !== null) {
     return urlFilter || null
   }
-  // Referrer heuristic: GitHub → All (null), everything else → Featured
+
+  // Priority 1: Return visitor's last viewed tab
+  if (returnVisitorTab === 'featured' || returnVisitorTab === 'technical') {
+    return returnVisitorTab
+  }
+
+  // Priority 2: Referrer heuristic - GitHub → All (null), everything else → Featured
   if (document.referrer.includes('github.com')) {
     return null
   }
@@ -41,12 +48,15 @@ function getFilterLabels(): string[] {
 export function Projects() {
   const { activeFilter, setActiveFilter } = useGalleryStore()
   const { t } = useTranslation()
+  const { lastViewedTab, setLastViewedTab, _hasHydrated } = useReturnVisitorStore()
 
-  // On mount: read URL params and apply referrer heuristic
+  // On mount: read URL params, return visitor tab, or apply referrer heuristic
   useEffect(() => {
-    const initial = getInitialFilter()
+    // Only apply return visitor tab if store has hydrated
+    const returnVisitorTab = _hasHydrated ? lastViewedTab : null
+    const initial = getInitialFilter(returnVisitorTab)
     setActiveFilter(initial)
-  }, [setActiveFilter])
+  }, [setActiveFilter, _hasHydrated, lastViewedTab])
 
   const filterLabels = useMemo(() => getFilterLabels(), [])
 
@@ -61,6 +71,11 @@ export function Projects() {
   function handleFilterChange(filter: string | null) {
     setActiveFilter(filter)
     updateUrl(filter)
+
+    // Track tab selection for return visitors
+    if (filter === 'featured' || filter === 'technical') {
+      setLastViewedTab(filter)
+    }
   }
 
   return (

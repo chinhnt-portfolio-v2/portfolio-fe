@@ -12,6 +12,16 @@
     "cta": {
       "evidence": "Xem dự án",
       "contact": "Liên hệ"
+    },
+    "context": {
+      "linkedin": {
+        "eyebrow": "⚡ Backend · Fullstack · Open to Work",
+        "tagline": "Kỹ sư fullstack có kinh nghiệm với chuyên môn production-grade. Xem các dự án để thấy những hệ thống thực tôi đã xây dựng và triển khai."
+      },
+      "cv-vn": {
+        "eyebrow": "⚡ Backend · Fullstack · Sẵn Sàng Làm Việc",
+        "tagline": "Kỹ sư fullstack kinh nghiệm với chuyên môn production-grade. Xem các dự án tôi đã xây dựng và triển khai."
+      }
     }
   },
   "projects": {
@@ -53,5 +63,11 @@
     "viewGitHub": "Xem trên GitHub ↗",
     "buildTimeline": "Lịch Sử Phát Triển",
     "lessonsLearned": "Nếu làm lại, tôi sẽ..."
+  },
+  "returnVisitor": {
+    "banner": {
+      "welcomeBack": "Chào mừng quay lại — tiếp tục xem dự án",
+      "dismiss": "Đóng"
+    }
   }
 }

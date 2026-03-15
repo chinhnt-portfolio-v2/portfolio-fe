@@ -6,6 +6,7 @@ import { axe } from 'vitest-axe'
 
 import HomePage from './HomePage'
 import { useThemeStore } from '@/stores/themeStore'
+import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
 
 vi.mock('@/stores/themeStore', () => ({
   useThemeStore: vi.fn(),
@@ -13,6 +14,10 @@ vi.mock('@/stores/themeStore', () => ({
 
 vi.mock('@/stores/languageStore', () => ({
   useLanguageStore: vi.fn(() => ({ language: 'en' })),
+}))
+
+vi.mock('@/stores/returnVisitorStore', () => ({
+  useReturnVisitorStore: vi.fn(),
 }))
 
 // Mock framer-motion for HomePage integration tests
@@ -28,6 +33,7 @@ vi.mock('framer-motion', () => ({
   },
   AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   useInView: () => true,
+  useReducedMotion: () => false,
   MotionConfig: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
@@ -37,6 +43,20 @@ describe('HomePage', () => {
       theme: 'dark',
       toggleTheme: vi.fn(),
       setTheme: vi.fn(),
+    })
+
+    vi.mocked(useReturnVisitorStore).mockReturnValue({
+      lastViewedSlug: null,
+      lastViewedTab: null,
+      lastVisitTimestamp: null,
+      bannerDismissed: false,
+      _hasHydrated: true,
+      setHasHydrated: vi.fn(),
+      setLastViewedSlug: vi.fn(),
+      setLastViewedTab: vi.fn(),
+      dismissBanner: vi.fn(),
+      updateTimestamp: vi.fn(),
+      isReturningVisitor: vi.fn().mockReturnValue(false),
     })
   })
 

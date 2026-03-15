@@ -9,6 +9,7 @@ import i18n from '@/i18n'
 import { detectInitialLanguage } from '@/lib/referral'
 import HomePage from '@/pages/HomePage'
 import { useLanguageStore } from '@/stores/languageStore'
+import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
 import { useThemeStore } from '@/stores/themeStore'
 
 // TODO: Command palette keyboard event registry — stub reserved for future story
@@ -17,6 +18,17 @@ const ProjectDetailPage = lazy(() => import('@/pages/ProjectDetailPage'))
 
 function AppRoutes() {
   const location = useLocation()
+  const { setLastViewedSlug, updateTimestamp } = useReturnVisitorStore()
+
+  // Track navigation to project detail pages
+  useEffect(() => {
+    const match = location.pathname.match(/^\/projects\/(.+)$/)
+    if (match) {
+      const slug = match[1]
+      setLastViewedSlug(slug)
+      updateTimestamp()
+    }
+  }, [location.pathname, setLastViewedSlug, updateTimestamp])
 
   return (
     <AnimatePresence mode="wait">
@@ -48,6 +60,14 @@ function AppRoutes() {
 export default function App() {
   const { theme } = useThemeStore()
   const { setLanguage } = useLanguageStore()
+  const { updateTimestamp, _hasHydrated } = useReturnVisitorStore()
+
+  // Initialize return visitor timestamp on each app load
+  useEffect(() => {
+    if (_hasHydrated) {
+      updateTimestamp()
+    }
+  }, [_hasHydrated, updateTimestamp])
 
   // Initialize WebSocket connection for live metrics
   useWebSocket()
