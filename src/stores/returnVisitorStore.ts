@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist, type PersistOptions } from 'zustand/middleware'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 type TabType = 'featured' | 'technical'
 
@@ -47,13 +47,8 @@ function createSafeStorage() {
   }
 }
 
-type ReturnVisitorPersist = (
-  config: (set: (partial: Partial<ReturnVisitorState> | ((state: ReturnVisitorState) => Partial<ReturnVisitorState>)) => void) => ReturnVisitorState,
-  options: PersistOptions<ReturnVisitorState>
-) => ReturnType<typeof create<ReturnVisitorState>>
-
 export const useReturnVisitorStore = create<ReturnVisitorState>()(
-  (persist as ReturnVisitorPersist)(
+  persist(
     (set, get) => ({
       lastViewedSlug: null,
       lastViewedTab: null,
@@ -79,7 +74,7 @@ export const useReturnVisitorStore = create<ReturnVisitorState>()(
     }),
     {
       name: 'pf_return_visitor',
-      storage: createSafeStorage(),
+      storage: createJSONStorage(() => createSafeStorage()),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true)
       },

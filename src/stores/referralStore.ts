@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist, type PersistOptions } from 'zustand/middleware'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 interface ReferralStore {
   referralSource: string | null
@@ -53,13 +53,8 @@ function createSafeStorage() {
   }
 }
 
-type ReferralPersist = (
-  config: (set: (partial: Partial<ReferralStore> | ((state: ReferralStore) => Partial<ReferralStore>)) => void) => ReferralStore,
-  options: PersistOptions<ReferralStore>
-) => ReturnType<typeof create<ReferralStore>>
-
 export const useReferralStore = create<ReferralStore>()(
-  (persist as ReferralPersist)(
+  persist(
     (set, get) => ({
       referralSource: null,
       _hasHydrated: false,
@@ -82,7 +77,7 @@ export const useReferralStore = create<ReferralStore>()(
     }),
     {
       name: 'referral-source',
-      storage: createSafeStorage(),
+      storage: createJSONStorage(() => createSafeStorage()),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true)
         // Initialize from URL after hydration completes

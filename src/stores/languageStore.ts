@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist, type PersistOptions } from 'zustand/middleware'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 import { useReferralStore } from './referralStore'
 
@@ -50,13 +50,8 @@ function createSafeStorage() {
   }
 }
 
-type LanguagePersist = (
-  config: (set: (partial: Partial<LanguageStore> | ((state: LanguageStore) => Partial<LanguageStore>)) => void) => LanguageStore,
-  options: PersistOptions<LanguageStore>
-) => ReturnType<typeof create<LanguageStore>>
-
 export const useLanguageStore = create<LanguageStore>()(
-  (persist as LanguagePersist)(
+  persist(
     (set, get) => ({
       language: 'en',
       _hasHydrated: false,
@@ -87,7 +82,7 @@ export const useLanguageStore = create<LanguageStore>()(
     }),
     {
       name: 'language-preference',
-      storage: createSafeStorage(),
+      storage: createJSONStorage(() => createSafeStorage()),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true)
         // Auto-set language from referral after hydration
