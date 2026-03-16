@@ -69,5 +69,27 @@
       "welcomeBack": "Welcome back — continue where you left off",
       "dismiss": "Dismiss"
     }
+  },
+  "contact": {
+    "heading": "Get in Touch",
+    "subheading": "Interested in working together? Send me a message and I'll get back to you as soon as possible.",
+    "form": {
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "message": "Message",
+      "messagePlaceholder": "Your message here...",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "success": "Message sent successfully!",
+      "sendAnother": "Send another message",
+      "honeypot": "Website"
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Enter a valid email address",
+      "messageRequired": "Message is required",
+      "messageMinLength": "Message must be at least 10 characters",
+      "rateLimit": "Too many submissions, please try again tomorrow"
+    }
   }
 }

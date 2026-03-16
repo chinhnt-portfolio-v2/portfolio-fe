@@ -1,10 +1,12 @@
 import { useSearchParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import { ContactForm } from '@/components/shared/ContactForm'
 
 export function Contact() {
   const [searchParams] = useSearchParams()
   const referralSource = searchParams.get('from') ?? undefined
+  const { t } = useTranslation()
 
   return (
     <section
@@ -18,10 +20,10 @@ export function Contact() {
             id="contact-heading"
             className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl"
           >
-            Get in Touch
+            {t('contact.heading')}
           </h2>
           <p className="text-muted-foreground">
-            Interested in working together? Send me a message and I&apos;ll get back to you as soon as possible.
+            {t('contact.subheading')}
           </p>
         </div>
 

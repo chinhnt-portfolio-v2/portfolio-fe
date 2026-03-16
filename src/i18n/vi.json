@@ -69,5 +69,27 @@
       "welcomeBack": "Chào mừng quay lại — tiếp tục xem dự án",
       "dismiss": "Đóng"
     }
+  },
+  "contact": {
+    "heading": "Liên Hệ",
+    "subheading": "Bạn quan tâm đến việc hợp tác? Gửi tin nhắn cho tôi, tôi sẽ phản hồi sớm nhất có thể.",
+    "form": {
+      "email": "Email",
+      "emailPlaceholder": "email@cuaban.com",
+      "message": "Tin nhắn",
+      "messagePlaceholder": "Nội dung bạn muốn gửi...",
+      "submit": "Gửi Tin Nhắn",
+      "submitting": "Đang gửi...",
+      "success": "Gửi tin nhắn thành công!",
+      "sendAnother": "Gửi tin nhắn khác",
+      "honeypot": "Website"
+    },
+    "validation": {
+      "emailRequired": "Vui lòng nhập email",
+      "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ",
+      "messageRequired": "Vui lòng nhập tin nhắn",
+      "messageMinLength": "Tin nhắn phải có ít nhất 10 ký tự",
+      "rateLimit": "Bạn đã gửi quá nhiều, vui lòng thử lại sau"
+    }
   }
 }

@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { submitContactForm } from '@/api/contact'
 import { SuccessAnimation } from '@/components/shared/SuccessAnimation'
@@ -16,6 +17,7 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ className, referralSource }: ContactFormProps) {
+  const { t } = useTranslation()
   const {
     register,
     handleSubmit,
@@ -43,7 +45,12 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
       reset()
     } catch (error) {
       setSubmitStatus('error')
-      setErrorMessage(error instanceof Error ? error.message : 'Failed to send message. Please try again.')
+      // Handle rate limit error specifically
+      if (error instanceof Error && error.message.includes('429')) {
+        setErrorMessage(t('contact.validation.rateLimit'))
+      } else {
+        setErrorMessage(error instanceof Error ? error.message : t('contact.validation.rateLimit'))
+      }
     }
   }
 
@@ -61,7 +68,7 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
           onClick={() => setSubmitStatus('idle')}
           className="mt-4 text-sm text-green-700 underline dark:text-green-300 hover:text-green-600"
         >
-          Send another message
+          {t('contact.form.sendAnother')}
         </button>
       </SuccessAnimation>
     )
@@ -70,7 +77,7 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={cn('space-y-4', className)}
+      className={cn('space-y-6', className)}
       noValidate
       role="form"
     >
@@ -88,9 +95,9 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          className="block mb-2 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          Email <span className="text-destructive" aria-hidden="true">*</span>
+          {t('contact.form.email')} <span className="text-destructive" aria-hidden="true">*</span>
         </label>
         <input
           id="email"
@@ -108,7 +115,7 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
             'min-h-[44px]',
             errors.email && 'border-destructive aria-invalid:ring-destructive/20'
           )}
-          placeholder="your@email.com"
+          placeholder={t('contact.form.emailPlaceholder')}
           autoComplete="email"
         />
         {errors.email && (
@@ -117,7 +124,9 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
             role="alert"
             className="mt-1 text-sm text-destructive"
           >
-            {errors.email.message}
+            {errors.email.message === 'Email is required' && t('contact.validation.emailRequired')}
+            {errors.email.message === 'Invalid email address' && t('contact.validation.emailInvalid')}
+            {!errors.email.message?.includes('required') && !errors.email.message?.includes('Invalid') && errors.email.message}
           </p>
         )}
       </div>
@@ -126,9 +135,9 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          className="block mb-2 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          Message <span className="text-destructive" aria-hidden="true">*</span>
+          {t('contact.form.message')} <span className="text-destructive" aria-hidden="true">*</span>
         </label>
         <textarea
           id="message"
@@ -146,7 +155,7 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
             'min-h-[44px]',
             errors.message && 'border-destructive aria-invalid:ring-destructive/20'
           )}
-          placeholder="Your message (minimum 10 characters)"
+          placeholder={t('contact.form.messagePlaceholder')}
           rows={5}
         />
         {errors.message && (
@@ -155,7 +164,9 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
             role="alert"
             className="mt-1 text-sm text-destructive"
           >
-            {errors.message.message}
+            {errors.message.message === 'Message is required' && t('contact.validation.messageRequired')}
+            {errors.message.message === 'Message must be at least 10 characters' && t('contact.validation.messageMinLength')}
+            {!errors.message.message?.includes('required') && !errors.message.message?.includes('characters') && errors.message.message}
           </p>
         )}
       </div>
@@ -173,7 +184,7 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
         disabled={isSubmitting}
         className="w-full min-h-[44px]"
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
       </Button>
     </form>
   )
