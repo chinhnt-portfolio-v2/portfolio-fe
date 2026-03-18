@@ -8,6 +8,7 @@ import { useWebSocket } from '@/hooks/useWebSocket'
 import i18n from '@/i18n'
 import { detectInitialLanguage } from '@/lib/referral'
 import HomePage from '@/pages/HomePage'
+import { useAuthStore } from '@/stores/authStore'
 import { useLanguageStore } from '@/stores/languageStore'
 import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
 import { useThemeStore } from '@/stores/themeStore'
@@ -61,6 +62,22 @@ export default function App() {
   const { theme } = useThemeStore()
   const { setLanguage } = useLanguageStore()
   const { updateTimestamp, _hasHydrated } = useReturnVisitorStore()
+  const { setTokens: setAuthTokens } = useAuthStore()
+
+  // Extract OAuth2 tokens from URL and store them
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const accessToken = params.get('accessToken')
+    const refreshToken = params.get('refreshToken')
+    const tokenType = params.get('tokenType')
+
+    if (accessToken && refreshToken && tokenType) {
+      setAuthTokens(accessToken, refreshToken, tokenType)
+      // Remove tokens from URL to clean up
+      const cleanUrl = window.location.pathname
+      window.history.replaceState({}, '', cleanUrl)
+    }
+  }, [setAuthTokens])
 
   // Initialize return visitor timestamp on each app load
   useEffect(() => {

@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
+import { useAuthStore } from '@/stores/authStore'
+
 export interface GitHubContributionData {
   username: string
   totalContributions: number
@@ -26,6 +28,7 @@ export const useGitHubContributions = (
   const [error, setError] = useState(false)
 
   const cachedDataRef = useRef<GitHubContributionData | null>(null)
+  const { accessToken } = useAuthStore()
 
   useEffect(() => {
     const fetchContributions = async () => {
@@ -36,8 +39,18 @@ export const useGitHubContributions = (
       const timeoutId = setTimeout(() => controller.abort(), 2000)
 
       try {
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+        }
+
+        // Add Authorization header if token exists
+        if (accessToken) {
+          headers['Authorization'] = `Bearer ${accessToken}`
+        }
+
         const response = await fetch(`${apiUrl}?username=${username}`, {
           signal: controller.signal,
+          headers,
         })
 
         clearTimeout(timeoutId)
@@ -93,7 +106,7 @@ export const useGitHubContributions = (
     if (username) {
       fetchContributions()
     }
-  }, [username, apiUrl])
+  }, [username, apiUrl, accessToken])
 
   return { data, isLoading, error }
 }
