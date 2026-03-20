@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next'
 
 import { GitHubGraph } from '@/components/shared/GitHubGraph'
 import { Badge } from '@/components/ui/badge'
-import { STATUS_COLOR, aboutContent } from '@/constants/about'
+import { aboutConfig, getAvailability, STATUS_COLOR, STATUS_KEY } from '@/config/about'
+import { getAllProjects } from '@/config/projects'
 import { GITHUB_USERNAME } from '@/constants/config'
 import { SPRING_GENTLE } from '@/constants/motion'
-import { projects } from '@/constants/projects'
 
 interface RevealBlockProps {
   children: React.ReactNode
@@ -32,7 +32,9 @@ function RevealBlock({ children, delay = 0 }: RevealBlockProps) {
 }
 
 export function About() {
-  const { skills, availability } = aboutContent
+  const { skills, whyHireMe } = aboutConfig
+  const availability = getAvailability()
+  const projects = getAllProjects()
   const { t } = useTranslation()
 
   return (
@@ -42,7 +44,7 @@ export function About() {
         <RevealBlock delay={0}>
           <div>
             <h2 id="about-heading" className="text-2xl font-semibold mb-4">{t('about.heading')}</h2>
-            <p className="text-muted-foreground leading-relaxed">{t('about.whyHireMe')}</p>
+            <p className="text-muted-foreground leading-relaxed">{whyHireMe}</p>
           </div>
         </RevealBlock>
 
@@ -86,12 +88,12 @@ export function About() {
               <span
                 className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium text-white"
                 style={{ backgroundColor: STATUS_COLOR[availability.status] ?? '#6B7280' }}
-                aria-label={`Job availability: ${t(`about.availability.${availability.status}`)}`}
+                aria-label={`Job availability: ${t(`about.availability.${STATUS_KEY[availability.status]}`)}`}
               >
                 <span className="h-2 w-2 rounded-full bg-white opacity-80" aria-hidden="true" />
-                {t(`about.availability.${availability.status}`)}
+                {t(`about.availability.${STATUS_KEY[availability.status]}`)}
               </span>
-              <span className="text-muted-foreground text-sm">{t('about.availability.location')}</span>
+              <span className="text-muted-foreground text-sm">{availability.location}</span>
             </div>
           </div>
         </RevealBlock>

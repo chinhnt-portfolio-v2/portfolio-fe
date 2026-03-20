@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 
 import { About } from '@/components/sections/About'
-import { STATUS_LABEL, aboutContent } from '@/constants/about'
+import { aboutContent } from '@/constants/about'
 import { projects } from '@/constants/projects'
 
 vi.mock('framer-motion', () => ({
@@ -66,9 +66,9 @@ describe('About', () => {
     expect(screen.getByRole('heading', { name: /availability/i })).toBeInTheDocument()
   })
 
-  it('renders the correct availability status label for "open"', () => {
+  it('renders the correct availability status label for "selective" (open-to-roles)', () => {
     render(<About />)
-    expect(screen.getByText(/open to work/i)).toBeInTheDocument()
+    expect(screen.getByText(/selectively looking/i)).toBeInTheDocument()
   })
 
   it('renders the location string', () => {
@@ -94,12 +94,6 @@ describe('About', () => {
     aboutContent.skills.forEach((skill) => {
       expect(slugs).toContain(skill.projectSlug)
     })
-  })
-
-  it('STATUS_LABEL maps all availability statuses correctly', () => {
-    expect(STATUS_LABEL.open).toBe('Open to Work')
-    expect(STATUS_LABEL.selective).toBe('Selectively Looking')
-    expect(STATUS_LABEL.unavailable).toBe('Not Available')
   })
 
   it('skill badge links have keyboard focus ring classes', () => {

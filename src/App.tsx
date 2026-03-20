@@ -7,6 +7,7 @@ import { PageTransition } from '@/components/layout/PageTransition'
 import { useWebSocket } from '@/hooks/useWebSocket'
 import i18n from '@/i18n'
 import { detectInitialLanguage } from '@/lib/referral'
+import { initAnalytics, trackPageView } from '@/services/analytics'
 import HomePage from '@/pages/HomePage'
 import { useAuthStore } from '@/stores/authStore'
 import { useLanguageStore } from '@/stores/languageStore'
@@ -16,6 +17,7 @@ import { useThemeStore } from '@/stores/themeStore'
 // TODO: Command palette keyboard event registry — stub reserved for future story
 
 const ProjectDetailPage = lazy(() => import('@/pages/ProjectDetailPage'))
+const AdminAnalyticsPage = lazy(() => import('@/pages/AdminAnalyticsPage'))
 
 function AppRoutes() {
   const location = useLocation()
@@ -30,6 +32,11 @@ function AppRoutes() {
       updateTimestamp()
     }
   }, [location.pathname, setLastViewedSlug, updateTimestamp])
+
+  // Auto-track page views with the analytics service on every route change
+  useEffect(() => {
+    trackPageView(location.pathname)
+  }, [location.pathname])
 
   return (
     <AnimatePresence mode="wait">
@@ -49,6 +56,14 @@ function AppRoutes() {
               <PageTransition>
                 <ProjectDetailPage />
               </PageTransition>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/analytics"
+          element={
+            <Suspense fallback={<div className="p-8 text-center text-muted-foreground">Loading analytics…</div>}>
+              <AdminAnalyticsPage />
             </Suspense>
           }
         />
@@ -85,6 +100,11 @@ export default function App() {
       updateTimestamp()
     }
   }, [_hasHydrated, updateTimestamp])
+
+  // Initialise analytics service (visitor fingerprint + session token)
+  useEffect(() => {
+    void initAnalytics()
+  }, [])
 
   // Initialize WebSocket connection for live metrics
   useWebSocket()

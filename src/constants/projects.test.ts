@@ -58,11 +58,11 @@ describe('projects data', () => {
     })
   })
 
-  it('timeline milestones have label and ISO date fields', () => {
+  it('timeline milestones have title and ISO date fields', () => {
     projects.forEach((p: ProjectConfig) => {
       p.timeline?.milestones.forEach(m => {
-        expect(typeof m.label).toBe('string')
-        expect(m.label.length).toBeGreaterThan(0)
+        expect(typeof m.title).toBe('string')
+        expect(m.title.length).toBeGreaterThan(0)
         expect(/^\d{4}-\d{2}-\d{2}$/.test(m.date)).toBe(true)
       })
     })

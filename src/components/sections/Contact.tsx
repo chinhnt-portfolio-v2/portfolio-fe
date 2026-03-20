@@ -13,6 +13,7 @@ export function Contact() {
       id="contact"
       className="py-16 md:py-24"
       aria-labelledby="contact-heading"
+      aria-label="Contact"
     >
       <div className="container mx-auto max-w-2xl px-4">
         <div className="mb-12 text-center">

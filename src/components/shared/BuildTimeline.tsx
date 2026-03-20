@@ -1,5 +1,5 @@
 interface Milestone {
-  label: string
+  title: string
   date: string // ISO: "YYYY-MM-DD"
 }
 
@@ -22,7 +22,7 @@ export function BuildTimeline({ milestones }: BuildTimelineProps) {
   return (
     <ol aria-label="Build timeline" className="relative ml-4 space-y-6 border-l-2 border-border pl-6">
       {milestones.map((milestone, i) => (
-        <li key={milestone.label} className="flex items-start gap-4">
+        <li key={milestone.title} className="flex items-start gap-4">
           <span
             aria-hidden="true"
             className="absolute -left-[1.125rem] flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-border bg-background text-sm font-semibold text-foreground"
@@ -30,7 +30,7 @@ export function BuildTimeline({ milestones }: BuildTimelineProps) {
             {i + 1}
           </span>
           <div className="min-w-0 flex-1 pt-1">
-            <span className="block font-medium text-foreground">{milestone.label}</span>
+            <span className="block font-medium text-foreground">{milestone.title}</span>
             <time dateTime={milestone.date} className="block text-sm text-muted-foreground">
               {formatMilestoneDate(milestone.date)}
             </time>

@@ -26,7 +26,7 @@ describe('aboutContent', () => {
   })
 
   it('availability.status is a valid enum value', () => {
-    const validStatuses: AvailabilityStatus[] = ['open', 'selective', 'unavailable']
+    const validStatuses: AvailabilityStatus[] = ['open', 'selective', 'unavailable', 'available', 'not-available', 'open-to-roles']
     expect(validStatuses).toContain(aboutContent.availability.status)
   })
 

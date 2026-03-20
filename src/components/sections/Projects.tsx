@@ -6,9 +6,13 @@ import { useTranslation } from 'react-i18next'
 import { FilterChip } from '@/components/shared/FilterChip'
 import { ProjectCard } from '@/components/shared/ProjectCard'
 import { SPRING_GENTLE } from '@/constants/motion'
-import { projects } from '@/constants/projects'
+import { getAllProjects } from '@/config/projects'
 import { useGalleryStore } from '@/stores/galleryStore'
 import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
+
+// Config-driven project list — add/remove entries in src/config/projects.ts
+// no component changes required.
+const projects = getAllProjects()
 
 function getInitialFilter(returnVisitorTab: string | null): string | null {
   const params = new URLSearchParams(window.location.search)
@@ -40,7 +44,7 @@ function updateUrl(filter: string | null) {
 
 // Derive unique sorted tech tags from all projects
 function getFilterLabels(): string[] {
-  const allTags = projects.flatMap(p => p.tags)
+  const allTags = projects.flatMap(p => p.techStack)
   const unique = Array.from(new Set(allTags)).sort()
   return unique
 }
@@ -64,7 +68,7 @@ export function Projects() {
     if (activeFilter === null) return projects
     if (activeFilter === 'featured') return projects.filter(p => p.featured)
     return projects.filter(p =>
-      p.tags.some(tag => tag.toLowerCase() === activeFilter.toLowerCase()),
+      p.techStack.some(tag => tag.toLowerCase() === activeFilter.toLowerCase()),
     )
   }, [activeFilter])
 
