@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { motion, AnimatePresence, type Variants } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 import { SPRING_BOUNCY } from '@/constants/motion'
 import { useMotion } from '@/hooks/useMotion'
@@ -77,6 +78,7 @@ export function SuccessAnimation({
   className,
 }: SuccessAnimationProps) {
   const { enabled: motionEnabled } = useMotion()
+  const { t } = useTranslation()
   const [showConfettiParticles, setShowConfettiParticles] = useState(false)
 
   // Start confetti animation after checkmark appears
@@ -131,7 +133,7 @@ export function SuccessAnimation({
           </svg>
         </div>
         <p className="text-green-800 dark:text-green-200">
-          Message sent! I&apos;ll get back to you soon.
+          {t('successAnimation.messageSent')}
         </p>
         {children}
       </div>
@@ -198,7 +200,7 @@ export function SuccessAnimation({
         transition={{ delay: 0.3, duration: 0.3 }}
         className="text-green-800 dark:text-green-200"
       >
-        Message sent! I&apos;ll get back to you soon.
+        {t('successAnimation.messageSent')}
       </motion.p>
 
       {children}

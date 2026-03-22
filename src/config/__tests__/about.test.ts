@@ -6,7 +6,7 @@ import {
   STATUS_COLOR,
   STATUS_KEY,
   type AvailabilityStatus,
-} from '../about'
+} from '@/config/about'
 
 describe('aboutConfig', () => {
   it('has a non-empty whyHireMe string', () => {

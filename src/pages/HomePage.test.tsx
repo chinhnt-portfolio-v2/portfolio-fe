@@ -5,8 +5,8 @@ import { describe, expect, it, vi, beforeEach } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import HomePage from './HomePage'
-import { useThemeStore } from '@/stores/themeStore'
 import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
+import { useThemeStore } from '@/stores/themeStore'
 
 vi.mock('@/stores/themeStore', () => ({
   useThemeStore: vi.fn(),
@@ -108,7 +108,7 @@ describe('HomePage', () => {
       </MemoryRouter>,
     )
     expect(screen.getByRole('region', { name: 'Hero' })).toBeInTheDocument()
-    expect(screen.getByText('⚡ Backend · Fullstack')).toBeInTheDocument()
+    expect(screen.getByText('⚡ AI-Augmented Fullstack Engineer')).toBeInTheDocument()
   })
 
   it('renders Projects section with heading', () => {

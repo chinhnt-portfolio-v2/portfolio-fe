@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { cn } from '@/lib/utils'
 
 type Status = 'live' | 'building' | 'archived'
@@ -7,26 +9,16 @@ interface StatusIndicatorProps {
   className?: string
 }
 
-const statusConfig: Record<Status, { dotClass: string; label: string; pulse: boolean }> = {
-  live: {
-    dotClass: 'bg-live',
-    label: 'Live',
-    pulse: true,
-  },
-  building: {
-    dotClass: 'bg-warning',
-    label: 'Building',
-    pulse: false,
-  },
-  archived: {
-    dotClass: 'bg-muted-foreground',
-    label: 'Archived',
-    pulse: false,
-  },
-}
-
 export function StatusIndicator({ status, className }: StatusIndicatorProps) {
-  const config = statusConfig[status]
+  const { t } = useTranslation()
+
+  const dotConfig: Record<Status, { dotClass: string; pulse: boolean }> = {
+    live: { dotClass: 'bg-live', pulse: true },
+    building: { dotClass: 'bg-warning', pulse: false },
+    archived: { dotClass: 'bg-muted-foreground', pulse: false },
+  }
+
+  const dot = dotConfig[status]
 
   return (
     <span
@@ -34,9 +26,9 @@ export function StatusIndicator({ status, className }: StatusIndicatorProps) {
       aria-label={`Project status: ${status}`}
     >
       <span
-        className={cn('h-2 w-2 rounded-full', config.dotClass, config.pulse && 'status-pulse')}
+        className={cn('h-2 w-2 rounded-full', dot.dotClass, dot.pulse && 'status-pulse')}
       />
-      <span className="text-xs font-medium text-muted-foreground">{config.label}</span>
+      <span className="text-xs font-medium text-muted-foreground">{t(`statusIndicator.${status}`)}</span>
     </span>
   )
 }

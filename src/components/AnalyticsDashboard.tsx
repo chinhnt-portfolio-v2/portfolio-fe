@@ -11,10 +11,13 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+
+import { useTranslation } from 'react-i18next'
+
+import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { fetchDashboard, type AnalyticsDashboard } from '@/services/analytics'
 import { useAuthStore } from '@/stores/authStore'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Button } from '@/components/ui/button'
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
@@ -98,6 +101,7 @@ interface AnalyticsDashboardProps {
 }
 
 export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboardProps) {
+  const { t } = useTranslation()
   const { accessToken } = useAuthStore()
   const [dashboard, setDashboard] = useState<AnalyticsDashboard | null>(null)
   const [loading, setLoading] = useState(true)
@@ -107,7 +111,7 @@ export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboa
 
   const loadDashboard = useCallback(async () => {
     if (!accessToken) {
-      setError('Authentication required. Please log in.')
+      setError(t('admin.authRequired'))
       setLoading(false)
       return
     }
@@ -119,11 +123,11 @@ export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboa
       setLastRefresh(new Date())
       onAdminVerified?.()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load analytics dashboard.')
+      setError(err instanceof Error ? err.message : t('admin.loadFailed'))
     } finally {
       setLoading(false)
     }
-  }, [accessToken, onAdminVerified])
+  }, [accessToken, onAdminVerified, t])
 
   // Initial load
   useEffect(() => {
@@ -175,7 +179,7 @@ export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboa
             void loadDashboard()
           }}
         >
-          Retry
+          {t('admin.retry')}
         </Button>
       </div>
     )
@@ -184,7 +188,7 @@ export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboa
   if (!dashboard) {
     return (
       <div className="rounded-lg border p-6 text-center text-sm text-muted-foreground">
-        No analytics data available yet.
+        {t('admin.noData')}
       </div>
     )
   }
@@ -200,16 +204,16 @@ export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboa
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold">Analytics Dashboard</h2>
+          <h2 className="text-lg font-semibold">{t('admin.dashboardHeading')}</h2>
           <p className="text-sm text-muted-foreground">
-            Period:{' '}
+            {t('admin.period')}{' '}
             {new Date(dashboard.periodStart).toLocaleDateString()} –{' '}
             {new Date(dashboard.periodEnd).toLocaleDateString()}
           </p>
         </div>
         {lastRefresh && (
           <p className="text-xs text-muted-foreground">
-            Auto-refreshes every 60s · Last updated{' '}
+            {t('admin.autoRefresh')}{' '}
             {lastRefresh.toLocaleTimeString()}
           </p>
         )}
@@ -217,14 +221,14 @@ export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboa
 
       {/* Summary stats */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <StatCard label="Unique Visitors" value={dashboard.uniqueVisitors.toLocaleString()} />
+        <StatCard label={t('admin.uniqueVisitors')} value={dashboard.uniqueVisitors.toLocaleString()} />
         <StatCard
-          label="Total Page Views"
+          label={t('admin.totalPageViews')}
           value={dashboard.pageViewsByRoute.reduce((sum, r) => sum + r.pageViews, 0).toLocaleString()}
         />
-        <StatCard label="Routes Tracked" value={dashboard.pageViewsByRoute.length} />
+        <StatCard label={t('admin.routesTracked')} value={dashboard.pageViewsByRoute.length} />
         <StatCard
-          label="Traffic Sources"
+          label={t('admin.trafficSources')}
           value={dashboard.trafficSources.length}
         />
       </div>
@@ -233,17 +237,17 @@ export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboa
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Page views by route */}
         <div className="rounded-lg border bg-card p-4 shadow-sm">
-          <h3 className="mb-3 font-medium">Page Views by Route</h3>
+          <h3 className="mb-3 font-medium">{t('admin.pageViewsByRoute')}</h3>
           {dashboard.pageViewsByRoute.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No page views recorded yet.</p>
+            <p className="text-sm text-muted-foreground">{t('admin.noPageViews')}</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b text-left text-muted-foreground">
-                    <th className="pb-2 font-medium">Route</th>
-                    <th className="pb-2 text-right font-medium">Page Views</th>
-                    <th className="pb-2 text-right font-medium">Unique Views</th>
+                    <th className="pb-2 text-right font-medium">{t('admin.route')}</th>
+                    <th className="pb-2 text-right font-medium">{t('admin.pageViews')}</th>
+                    <th className="pb-2 text-right font-medium">{t('admin.uniqueViews')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -262,9 +266,9 @@ export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboa
 
         {/* Traffic sources */}
         <div className="rounded-lg border bg-card p-4 shadow-sm">
-          <h3 className="mb-3 font-medium">Traffic Sources</h3>
+          <h3 className="mb-3 font-medium">{t('admin.trafficSources')}</h3>
           {trafficSourceBars.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No traffic source data yet.</p>
+            <p className="text-sm text-muted-foreground">{t('admin.noData')}</p>
           ) : (
             <BarChart data={trafficSourceBars} color="bg-blue-500" />
           )}
@@ -274,14 +278,14 @@ export default function AnalyticsDashboard({ onAdminVerified }: AnalyticsDashboa
       {/* Daily visitor trend */}
       {dashboard.visitorsByPeriod.length > 0 && (
         <div className="rounded-lg border bg-card p-4 shadow-sm">
-          <h3 className="mb-3 font-medium">Daily Unique Visitors</h3>
+          <h3 className="mb-3 font-medium">{t('admin.dailyUniqueVisitors')}</h3>
           <TrendLine data={dashboard.visitorsByPeriod} />
         </div>
       )}
 
       {/* Generated timestamp */}
       <p className="text-xs text-muted-foreground">
-        Dashboard generated at {new Date(dashboard.generatedAt).toLocaleString()}
+        {t('admin.dashboardGenerated')} {new Date(dashboard.generatedAt).toLocaleString()}
       </p>
     </div>
   )

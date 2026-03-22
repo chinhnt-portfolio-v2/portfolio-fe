@@ -14,9 +14,9 @@ describe('StatusIndicator', () => {
     expect(screen.getByText('Building')).toBeInTheDocument()
   })
 
-  it('renders "Archived" label for archived status', () => {
+  it('renders "Live Product" label for archived status', () => {
     render(<StatusIndicator status="archived" />)
-    expect(screen.getByText('Archived')).toBeInTheDocument()
+    expect(screen.getByText('Live Product')).toBeInTheDocument()
   })
 
   it('has correct aria-label for live status', () => {

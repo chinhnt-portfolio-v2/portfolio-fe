@@ -16,6 +16,7 @@ const NAV_LINK_DEFS = [
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useThemeStore()
+  const { t } = useTranslation()
   const isDark = theme === 'dark'
 
   return (
@@ -23,7 +24,7 @@ function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={isDark ? t('nav.switchToLight') : t('nav.switchToDark')}
       className="focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2"
     >
       {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -33,6 +34,7 @@ function ThemeToggle() {
 
 function LanguageToggle() {
   const { language, setLanguage } = useLanguageStore()
+  const { t } = useTranslation()
 
   return (
     <Button
@@ -40,7 +42,7 @@ function LanguageToggle() {
       size="sm"
       onClick={() => setLanguage(language === 'en' ? 'vi' : 'en')}
       className="focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 font-mono text-sm"
-      aria-label="Switch language"
+      aria-label={t('nav.switchLanguage')}
     >
       <span className={language === 'en' ? 'font-semibold text-foreground' : 'text-muted-foreground'}>
         EN
@@ -103,7 +105,7 @@ export function Nav() {
             onClick={() => setMobileOpen(true)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
-            aria-label="Open navigation menu"
+            aria-label={t('nav.openMenu')}
           >
             <Menu className="h-5 w-5" />
           </Button>

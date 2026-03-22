@@ -5,8 +5,7 @@ import {
   getAvailableProjects,
   getProjectBySlug,
   projects,
-  type Project,
-} from '../projects'
+} from '@/config/projects'
 
 // ---------------------------------------------------------------------------
 // Data shape
@@ -22,8 +21,9 @@ describe('projects data', () => {
       expect(p.slug.length).toBeGreaterThan(0)
       expect(typeof p.name).toBe('string')
       expect(p.name.length).toBeGreaterThan(0)
+      // description/artistStatement/lessonsLearned: source of truth moved to i18n;
+      // config fields are kept as empty-string fallbacks — still typed as string.
       expect(typeof p.description).toBe('string')
-      expect(p.description.length).toBeGreaterThan(0)
       expect(Array.isArray(p.techStack)).toBe(true)
       expect(p.techStack.length).toBeGreaterThan(0)
       expect(p.demoUrl === null || typeof p.demoUrl === 'string').toBe(true)
@@ -48,12 +48,13 @@ describe('projects data', () => {
     expect(unique.size).toBe(slugs.length)
   })
 
-  it('timeline milestones have ISO date format (YYYY-MM-DD)', () => {
+  it('timeline milestones have ISO date format and a key', () => {
     for (const p of projects) {
       for (const m of p.timeline.milestones) {
         expect(/^\d{4}-\d{2}-\d{2}$/.test(m.date)).toBe(true)
-        expect(typeof m.title).toBe('string')
-        expect(m.title.length).toBeGreaterThan(0)
+        // title/description moved to i18n; milestone now carries a `key` for lookup
+        expect(typeof m.key).toBe('string')
+        expect(m.key.length).toBeGreaterThan(0)
       }
     }
   })

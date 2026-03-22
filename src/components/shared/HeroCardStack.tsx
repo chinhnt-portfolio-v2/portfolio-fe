@@ -1,6 +1,8 @@
+import { useTranslation } from 'react-i18next'
+
 import { MetricPair } from './MetricPair'
 import { StatusIndicator } from './StatusIndicator'
-import { projects } from '@/constants/projects'
+import { projects } from '@/config/projects'
 import { cn } from '@/lib/utils'
 
 interface HeroCardStackProps {
@@ -24,6 +26,7 @@ function computeMetrics() {
 
 export function HeroCardStack({ className }: HeroCardStackProps) {
   const { projectCount, avgShipDays } = computeMetrics()
+  const { t } = useTranslation()
 
   return (
     <div
@@ -43,19 +46,25 @@ export function HeroCardStack({ className }: HeroCardStackProps) {
       <div className="flex flex-col gap-4">
         <MetricPair
           value={projectCount}
-          label="projects shipped"
+          label={t('hero.heroCard.projectsShipped')}
         />
 
         {avgShipDays !== null && (
           <MetricPair
             value={avgShipDays}
-            label="avg. days to ship"
+            label={t('hero.heroCard.avgDaysToShip')}
           />
         )}
 
+        {/*
+         * Placeholder: real uptime % will be computed from live WebSocket metrics once Epic 3
+         * (Live Evidence Layer) is complete. Until then "99%+" is a static aspirational signal
+         * — not backed by actual measurement. Refactor to compute from project uptimeDays data
+         * when live metrics are available.
+         */}
         <MetricPair
           value="99%+"
-          label="uptime (30d)"
+          label={t('hero.heroCard.uptime')}
         />
       </div>
     </div>

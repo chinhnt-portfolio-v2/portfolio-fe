@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import {
   Sheet,
   SheetContent,
@@ -18,13 +20,15 @@ interface MobileSheetProps {
 }
 
 export function MobileSheet({ isOpen, onClose, navLinks }: MobileSheetProps) {
+  const { t } = useTranslation()
+
   return (
     <Sheet open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <SheetContent side="right" id="mobile-nav">
         <SheetHeader>
-          <SheetTitle>Navigation</SheetTitle>
+          <SheetTitle>{t('mobileSheet.title')}</SheetTitle>
           <SheetDescription className="sr-only">
-            Main navigation links
+            {t('mobileSheet.description')}
           </SheetDescription>
         </SheetHeader>
         <nav aria-label="Mobile navigation">

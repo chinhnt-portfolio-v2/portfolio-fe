@@ -11,16 +11,12 @@ describe('projects data', () => {
     projects.forEach((p: ProjectConfig) => {
       expect(p.slug).toBeTruthy()
       expect(p.title).toBeTruthy()
-      expect(p.description).toBeTruthy()
+      // description/artistStatement/lessonsLearned: source of truth moved to i18n;
+      // config fields kept as string (may be empty) for backward compatibility
+      expect(typeof p.description).toBe('string')
       expect(p.tags).toBeInstanceOf(Array)
       expect(p.tags.length).toBeGreaterThan(0)
       expect(['live', 'building', 'archived']).toContain(p.status)
-    })
-  })
-
-  it('description is ≤ 80 characters for each project', () => {
-    projects.forEach((p: ProjectConfig) => {
-      expect(p.description.length).toBeLessThanOrEqual(80)
     })
   })
 
@@ -43,14 +39,6 @@ describe('projects data', () => {
     })
   })
 
-  it('every project has lessonsLearned populated', () => {
-    projects.forEach((p: ProjectConfig) => {
-      expect(p.lessonsLearned).toBeDefined()
-      expect(typeof p.lessonsLearned).toBe('string')
-      expect((p.lessonsLearned as string).length).toBeGreaterThan(0)
-    })
-  })
-
   it('every project has at least 2 timeline milestones', () => {
     projects.forEach((p: ProjectConfig) => {
       expect(p.timeline).toBeDefined()
@@ -58,11 +46,12 @@ describe('projects data', () => {
     })
   })
 
-  it('timeline milestones have title and ISO date fields', () => {
+  it('timeline milestones have ISO date and i18n key', () => {
     projects.forEach((p: ProjectConfig) => {
       p.timeline?.milestones.forEach(m => {
-        expect(typeof m.title).toBe('string')
-        expect(m.title.length).toBeGreaterThan(0)
+        // title/description moved to i18n; milestone now carries a `key` for lookup
+        expect(typeof m.key).toBe('string')
+        expect(m.key.length).toBeGreaterThan(0)
         expect(/^\d{4}-\d{2}-\d{2}$/.test(m.date)).toBe(true)
       })
     })

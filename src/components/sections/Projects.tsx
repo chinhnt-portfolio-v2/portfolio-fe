@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next'
 
 import { FilterChip } from '@/components/shared/FilterChip'
 import { ProjectCard } from '@/components/shared/ProjectCard'
-import { SPRING_GENTLE } from '@/constants/motion'
 import { getAllProjects } from '@/config/projects'
+import { SPRING_GENTLE } from '@/constants/motion'
 import { useGalleryStore } from '@/stores/galleryStore'
 import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
 
@@ -121,7 +121,11 @@ export function Projects() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={SPRING_GENTLE}
                 >
-                  <ProjectCard {...project} index={i} />
+                  <ProjectCard
+                    {...project}
+                    description={t(`projects.${project.slug}.description`) || project.description}
+                    index={i}
+                  />
                 </motion.div>
               ))
             ) : (

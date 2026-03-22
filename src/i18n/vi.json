@@ -2,25 +2,34 @@
   "nav": {
     "projects": "Dự án",
     "about": "Giới thiệu",
-    "contact": "Liên hệ"
+    "contact": "Liên hệ",
+    "switchToLight": "Chuyển sang chế độ sáng",
+    "switchToDark": "Chuyển sang chế độ tối",
+    "switchLanguage": "Chuyển ngôn ngữ",
+    "openMenu": "Mở menu điều hướng"
   },
   "hero": {
-    "eyebrow": "⚡ Backend · Fullstack",
+    "eyebrow": "⚡ Kỹ Sư Fullstack Tăng Cường AI",
     "headingPrefix": "Xây dựng hệ thống",
     "headingHighlight": "vận hành ổn định.",
-    "tagline": "Kỹ sư fullstack chuyên xây dựng hệ thống production-grade — không chỉ là demo. Mỗi dự án đều có infrastructure thực, CI/CD, và observability trực tiếp.",
+    "tagline": "Tôi ship hệ thống production với AI như cộng sự lập trình. 216+ test, CI/CD ngày 13.",
     "cta": {
       "evidence": "Xem dự án",
       "contact": "Liên hệ"
     },
+    "heroCard": {
+      "projectsShipped": "dự án đã ship",
+      "avgDaysToShip": "trung bình ngày ship",
+      "uptime": "uptime (30 ngày)"
+    },
     "context": {
       "linkedin": {
-        "eyebrow": "⚡ Backend · Fullstack · Open to Work",
-        "tagline": "Kỹ sư fullstack có kinh nghiệm với chuyên môn production-grade. Xem các dự án để thấy những hệ thống thực tôi đã xây dựng và triển khai."
+        "eyebrow": "⚡ AI-Augmented Fullstack · Open to Work",
+        "tagline": "Experienced fullstack engineer who uses AI as a production tool throughout the SDLC. 13 days to production. 216+ tests. No shortcuts."
       },
       "cv-vn": {
-        "eyebrow": "⚡ Backend · Fullstack · Sẵn Sàng Làm Việc",
-        "tagline": "Kỹ sư fullstack kinh nghiệm với chuyên môn production-grade. Xem các dự án tôi đã xây dựng và triển khai."
+        "eyebrow": "⚡ Kỹ Sư Fullstack Tăng Cường AI · Sẵn Sàng",
+        "tagline": "Tôi xây dựng hệ thống production với AI như cộng sự. 216+ bài test, CI/CD ngày 13. Không đường tắt."
       }
     }
   },
@@ -30,23 +39,89 @@
       "all": "Tất cả",
       "featured": "Nổi bật"
     },
+    "viewProject": "Xem dự án →",
+    "viewProjectAria": "Xem dự án",
+    "daysToShip": "ngày đến ship",
+    "daysUptime": "ngày uptime",
+    "statusUnavailable": "Trạng thái không khả dụng",
+    "uptime": "uptime %",
+    "responseTime": "ms",
+    "viewLiveDemo": "Mở demo của",
+    "viewSourceCode": "Xem source code của",
     "emptyState": {
       "message": "Không có dự án phù hợp với bộ lọc này.",
       "reset": "Xoá bộ lọc →"
+    },
+    "sapo-social-channel": {
+      "description": "Nền tảng thương mại social đa kênh — hộp thư thống nhất Facebook, Instagram, Zalo.",
+      "artistStatement": "Là thành viên của team Sapo Social Channel, tôi phát triển và bảo trì inbox thống nhất trên Facebook, Instagram và Zalo. Tôi đã lead việc nâng cấp Node 14→18 và React 16→18, tích hợp Sentry để theo dõi lỗi real-time, và đóng góp vào các dashboard Grafana.",
+      "lessonsLearned": "Các edge cases của distributed systems xuất hiện vào lúc 3h sáng. Thiết kế hệ thống chịu lỗi từ đầu — circuit breakers, dead-letter queues, Grafana alerts — là không thể thiếu.",
+      "timeline": {
+        "m1": { "title": "Tham gia Sapo — Team Social Channel", "description": "Bắt đầu công việc Fullstack Developer" },
+        "m2": { "title": "Nâng cấp Node.js: 14 → 18", "description": "Dẫn dắt migration để cải thiện hiệu suất runtime" },
+        "m3": { "title": "Nâng cấp React: 16 → 18", "description": "Giải quyết các vấn đề hydration, bật tính năng concurrent" }
+      }
+    },
+    "facebook-shopping": {
+      "description": "Đồng bộ Facebook Catalog + Giao diện Live Shopping cho merchant Sapo.",
+      "artistStatement": "Tôi đã ship engine đồng bộ catalog và giao diện Facebook Live Shopping cho phép merchant broadcast sản phẩm trực tiếp đến khách hàng trên Facebook — không cần chuyển đổi giữa Sapo và Meta Business Manager.",
+      "lessonsLearned": "API Facebook Catalog có rate limits khắc nghiệt. Batch processing với exponential backoff được thêm vào sau incident đầu tiên ở production. Luôn thiết kế cho rate limiting ngay từ đầu.",
+      "timeline": {
+        "m1": { "title": "Bắt đầu dự án Facebook Shopping", "description": "Tích hợp toàn bộ Facebook Catalog và Live Shopping vào Sapo" },
+        "m2": { "title": "Giao diện Live Shopping hoàn thành", "description": "Merchant có thể broadcast sản phẩm trực tiếp đến khách hàng Facebook" }
+      }
+    },
+    "wallet-app": {
+      "description": "Demo fintech: JWT auth, Google OAuth2, theo dõi giao dịch, đã deploy.",
+      "artistStatement": "Được xây dựng để chứng minh tôi có thể ship một hệ thống auth bảo mật, production-ready từ đầu. JWT rotation, refresh token flow, OAuth2 callback edge cases — mọi scenario đều được xử lý, không chỉ happy path.",
+      "lessonsLearned": "Token refresh logic rối với main auth flow gây refactoring đau đớn ở tuần 3. Separation of concerns từ ngày một sẽ tiết kiệm một ngày làm việc.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "Wallet app project born" },
+        "m2": { "title": "Google OAuth2 Integration", "description": "Full OAuth2 flow với refresh tokens và JWT" },
+        "m3": { "title": "Production Deploy", "description": "Live tại wallet.chinh.dev" }
+      }
+    },
+    "portfolio-v2": {
+      "description": "Portfolio full-stack tăng cường AI: Spring Boot BE, React/TypeScript FE, CI/CD.",
+      "artistStatement": "Tăng cường AI từ commit #1. Tôi dùng Claude Code và AI tools trong mọi giai đoạn SDLC — spec drafting, implementation, test generation, linting, security review. Portfolio này là bằng chứng AI tăng tốc shipping mà không hy sinh chất lượng. 13 ngày từ commit đầu tiên đến production. 216+ test pass.",
+      "lessonsLearned": "BMAD agent orchestration cho spec → implementation → tests là game changer cho solo developers. Test coverage cao hơn trong 13 ngày so với hầu hết các team trong 3 tháng.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "Project được scaffold với BMAD agent orchestration" },
+        "m2": { "title": "Production Deploy", "description": "Live tại chinh.dev — CI/CD tự động, tests green" }
+      }
+    },
+    "sapo-social-mobile": {
+      "description": "Ứng dụng React Native cho Sapo Social — trả lời tin nhắn mọi lúc mọi nơi.",
+      "artistStatement": "Mobile không bao giờ là vùng thoải mái của tôi. React Native buộc tôi phải nghĩ bằng components, không phải pages. Đã ship message reply UI với offline-first caching để seller không bao giờ miss một inquiry.",
+      "lessonsLearned": "Offline-first trên mobile khác hoàn toàn với web caching. Schema SQLite local phải thiết kế lại 2 lần sau khi phát hiện sync conflicts ở production. Offline-first là mindset, không phải library.",
+      "timeline": {
+        "m1": { "title": "Sapo Social Mobile", "description": "Built mobile UI và API integration cho Sapo Social Mobile app" },
+        "m2": { "title": "Offline-First Caching Shipped", "description": "Message reply UI với local caching — sellers không bao giờ miss inquiry" }
+      }
+    },
+    "hospital-website": {
+      "description": "Hệ thống đặt lịch bệnh viện full-stack với load balancing và MongoDB.",
+      "artistStatement": "Luận văn tốt nghiệp. Là trưởng nhóm, tôi thiết kế kiến trúc load balancing và xây dựng flow đặt lịch full-stack trong team 2 người. Cấu hình nginx cho production traffic là kỹ năng thực tế giá trị nhất tôi mang theo từ project này.",
+      "lessonsLearned": "Nên định nghĩa MongoDB schema TRƯỚC KHI đụng UI. Đổi schema 3 lần, mỗi lần break frontend. Schema-first development — bài học nhớ mãi.",
+      "timeline": {
+        "m1": { "title": "Thesis Start", "description": "Hospital Website project được khởi động" },
+        "m2": { "title": "Defense", "description": "Tốt nghiệp với luận văn về distributed hospital booking system" }
+      }
     }
   },
   "about": {
     "heading": "Tại Sao Chọn Tôi",
-    "whyHireMe": "Tôi xây dựng hệ thống để chạy bền vững — không chỉ là demo sống sót qua một buổi thuyết trình. Triết lý kỹ thuật của tôi là làm cho điều vô hình trở nên hiển thị: instrumentation, CI/CD guardrails, và tài liệu trung thực về mọi quyết định kiến trúc, kể cả những quyết định sai. Tôi coi mỗi dự án là hệ thống production ngay từ ngày đầu tiên — bạn có được một developer vừa ship, vừa monitor, vừa cải thiện liên tục.",
+    "whyHireMe": "Tôi là Kỹ Sư Fullstack Tăng Cường AI — không phải theo nghĩa 'tôi dùng Copilot', mà theo nghĩa 'AI là công cụ hàng đầu trong mọi giai đoạn workflow của tôi'. Tôi dùng AI để soạn spec, tạo test, bắt edge cases, và giữ chất lượng đầu ra ổn định ở quy mô lớn. Kết quả: 216+ test pass, CI/CD ngày 13, và một portfolio trung thực về những gì tôi đã xây dựng cùng cách tôi xây dựng. Tôi đang tìm một team coi trọng việc ship sản phẩm chất lượng hơn là ship nhiều.",
     "skills": {
-      "heading": "Kỹ Năng Đã Được Chứng Minh"
+      "heading": "Kỹ Năng Đã Được Chứng Minh",
+      "proofProject": "xem dự án minh chứng"
     },
     "availability": {
       "heading": "Tình Trạng Tuyển Dụng",
       "open": "Sẵn Sàng Làm Việc",
       "selective": "Đang Xem Xét",
       "unavailable": "Không Nhận",
-      "location": "Remote · Hồ Chí Minh"
+      "location": "Hà Nội · Remote"
     },
     "githubContributions": {
       "label": "Đóng góp GitHub",
@@ -63,6 +138,21 @@
     "viewGitHub": "Xem trên GitHub ↗",
     "buildTimeline": "Lịch Sử Phát Triển",
     "lessonsLearned": "Nếu làm lại, tôi sẽ..."
+  },
+  "statusIndicator": {
+    "live": "Live",
+    "building": "Đang xây dựng",
+    "archived": "Sản phẩm Live"
+  },
+  "mobileSheet": {
+    "title": "Điều hướng",
+    "description": "Các liên kết điều hướng chính"
+  },
+  "skipLinks": {
+    "skipToMain": "Nhảy đến nội dung chính"
+  },
+  "successAnimation": {
+    "messageSent": "Tin nhắn đã gửi! Tôi sẽ phản hồi sớm nhất có thể."
   },
   "returnVisitor": {
     "banner": {
@@ -91,5 +181,27 @@
       "messageMinLength": "Tin nhắn phải có ít nhất 10 ký tự",
       "rateLimit": "Bạn đã gửi quá nhiều, vui lòng thử lại sau"
     }
+  },
+  "admin": {
+    "accessRequired": "Yêu Cầu Quyền Admin",
+    "accessRequiredDesc": "Vui lòng đăng nhập bằng tài khoản admin để xem analytics.",
+    "authRequired": "Yêu cầu xác thực. Vui lòng đăng nhập.",
+    "loadFailed": "Không thể tải analytics dashboard.",
+    "retry": "Thử lại",
+    "noData": "Chưa có dữ liệu analytics.",
+    "dashboardHeading": "Analytics Dashboard",
+    "period": "Kỳ:",
+    "autoRefresh": "Tự động cập nhật mỗi 60s · Cập nhật lần cuối",
+    "uniqueVisitors": "Lượt khách",
+    "totalPageViews": "Tổng lượt xem",
+    "routesTracked": "Routes đang theo dõi",
+    "trafficSources": "Nguồn traffic",
+    "pageViewsByRoute": "Lượt xem theo Route",
+    "noPageViews": "Chưa có lượt xem trang nào.",
+    "route": "Route",
+    "pageViews": "Lượt xem",
+    "uniqueViews": "Lượt khách",
+    "dailyUniqueVisitors": "Lượt khách hàng ngày",
+    "dashboardGenerated": "Dashboard được tạo lúc"
   }
 }

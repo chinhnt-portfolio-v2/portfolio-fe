@@ -8,12 +8,12 @@ import { Link, useParams } from 'react-router-dom'
 import { BuildTimeline } from '@/components/shared/BuildTimeline'
 import { StatusIndicator } from '@/components/shared/StatusIndicator'
 import { Badge } from '@/components/ui/badge'
+import { getAllProjects } from '@/config/projects'
 import { SPRING_GENTLE } from '@/constants/motion'
-import { projects } from '@/constants/projects'
 
 export default function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>()
-  const project = projects.find(p => p.slug === slug)
+  const project = getAllProjects().find(p => p.slug === slug)
   const [lessonsOpen, setLessonsOpen] = useState(false)
   const { t } = useTranslation()
 
@@ -42,9 +42,10 @@ export default function ProjectDetailPage() {
       </div>
 
       {/* Artist Statement */}
-      {project.artistStatement && (
-        <p className="mb-6 text-lg text-muted-foreground">{project.artistStatement}</p>
-      )}
+      {(() => {
+        const text = t(`projects.${project.slug}.artistStatement`) || project.artistStatement
+        return text ? <p className="mb-6 text-lg text-muted-foreground">{text}</p> : null
+      })()}
 
       {/* Tech stack */}
       <div role="list" aria-label="Tech stack" className="mb-6 flex flex-wrap gap-2">
@@ -93,39 +94,43 @@ export default function ProjectDetailPage() {
           <h2 id="timeline-heading" className="mb-4 text-lg font-semibold text-foreground">
             {t('projectDetail.buildTimeline')}
           </h2>
-          <BuildTimeline milestones={project.timeline.milestones} />
+          <BuildTimeline milestones={project.timeline.milestones} slug={project.slug} t={t} />
         </section>
       )}
 
       {/* Collapsible: What I'd do differently */}
-      {project.lessonsLearned && (
-        <section aria-labelledby="lessons-heading" className="mb-8">
-          <button
-            id="lessons-heading"
-            onClick={() => setLessonsOpen(o => !o)}
-            aria-expanded={lessonsOpen}
-            className="flex w-full items-center justify-between text-left text-base font-semibold text-foreground hover:text-brand focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none rounded-sm"
-          >
-            <span>{t('projectDetail.lessonsLearned')}</span>
-            <span aria-hidden="true">{lessonsOpen ? '▲' : '▼'}</span>
-          </button>
-          <AnimatePresence>
-            {lessonsOpen && (
-              <motion.div
-                key="lessons"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={SPRING_GENTLE}
-                style={{ overflow: 'hidden' }}
-                data-testid="lessons-content"
-              >
-                <p className="mt-3 text-muted-foreground">{project.lessonsLearned}</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </section>
-      )}
+      {(() => {
+        const text = t(`projects.${project.slug}.lessonsLearned`) || project.lessonsLearned
+        if (!text) return null
+        return (
+          <section aria-labelledby="lessons-heading" className="mb-8">
+            <button
+              id="lessons-heading"
+              onClick={() => setLessonsOpen(o => !o)}
+              aria-expanded={lessonsOpen}
+              className="flex w-full items-center justify-between text-left text-base font-semibold text-foreground hover:text-brand focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none rounded-sm"
+            >
+              <span>{t('projectDetail.lessonsLearned')}</span>
+              <span aria-hidden="true">{lessonsOpen ? '▲' : '▼'}</span>
+            </button>
+            <AnimatePresence>
+              {lessonsOpen && (
+                <motion.div
+                  key="lessons"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={SPRING_GENTLE}
+                  style={{ overflow: 'hidden' }}
+                  data-testid="lessons-content"
+                >
+                  <p className="mt-3 text-muted-foreground">{text}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </section>
+        )
+      })()}
 
       {/* BuildStoryPreview placeholder — Phase 2 (reserved slot, no layout shift) */}
       <div aria-hidden="true" />

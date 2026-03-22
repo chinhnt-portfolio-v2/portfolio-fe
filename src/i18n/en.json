@@ -2,25 +2,34 @@
   "nav": {
     "projects": "Projects",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "switchLanguage": "Switch language",
+    "openMenu": "Open navigation menu"
   },
   "hero": {
-    "eyebrow": "⚡ Backend · Fullstack",
+    "eyebrow": "⚡ AI-Augmented Fullstack Engineer",
     "headingPrefix": "Building systems",
     "headingHighlight": "that stay live.",
-    "tagline": "Fullstack engineer focused on production-grade systems — not just demos. Every project ships with real infrastructure, CI/CD, and live observability.",
+    "tagline": "I ship production systems with AI as my pair programmer. 216+ tests, CI/CD on day 13.",
     "cta": {
       "evidence": "See the evidence",
       "contact": "Get in touch"
     },
+    "heroCard": {
+      "projectsShipped": "projects shipped",
+      "avgDaysToShip": "avg. days to ship",
+      "uptime": "uptime (30d)"
+    },
     "context": {
       "linkedin": {
-        "eyebrow": "⚡ Backend · Fullstack · Open to Work",
-        "tagline": "Experienced fullstack engineer with production-grade expertise. Browse my projects to see real systems I've built and deployed."
+        "eyebrow": "⚡ AI-Augmented Fullstack · Open to Work",
+        "tagline": "Experienced fullstack engineer who uses AI as a production tool throughout the SDLC. 13 days to production. 216+ tests. No shortcuts."
       },
       "cv-vn": {
-        "eyebrow": "⚡ Backend · Fullstack · Sẵn Sàng Làm Việc",
-        "tagline": "Kỹ sư fullstack kinh nghiệm với chuyên môn production-grade. Xem các dự án tôi đã xây dựng và triển khai."
+        "eyebrow": "⚡ Kỹ Sư Fullstack Tăng Cường AI · Sẵn Sàng",
+        "tagline": "Tôi xây dựng hệ thống production với AI như cộng sự. 216+ bài test, CI/CD ngày 13. Không đường tắt."
       }
     }
   },
@@ -30,23 +39,89 @@
       "all": "All",
       "featured": "Featured"
     },
+    "viewProject": "View project →",
+    "viewProjectAria": "View project",
+    "daysToShip": "days to ship",
+    "daysUptime": "days uptime",
+    "statusUnavailable": "Status unavailable",
+    "uptime": "uptime %",
+    "responseTime": "ms",
+    "viewLiveDemo": "Open live demo for",
+    "viewSourceCode": "View source code for",
     "emptyState": {
       "message": "No projects match this filter.",
       "reset": "Reset filter →"
+    },
+    "sapo-social-channel": {
+      "description": "Omnichannel social commerce platform — Facebook, Instagram, Zalo unified inbox.",
+      "artistStatement": "As a member of the Sapo Social Channel team, I developed and maintained the unified inbox across Facebook, Instagram, and Zalo. I led the Node 14→18 and React 16→18 upgrades, integrated Sentry for real-time error monitoring, and contributed to the Grafana dashboards.",
+      "lessonsLearned": "Distributed system edge cases appear at 3 AM. Building fault-tolerant systems from day one — circuit breakers, dead-letter queues, Grafana alerts — is non-negotiable.",
+      "timeline": {
+        "m1": { "title": "Joined Sapo — Social Channel Team", "description": "Started as a Fullstack Developer" },
+        "m2": { "title": "Node.js upgrade: 14 → 18", "description": "Led the migration to improve runtime performance" },
+        "m3": { "title": "React upgrade: 16 → 18", "description": "Resolved hydration issues, enabled concurrent features" }
+      }
+    },
+    "facebook-shopping": {
+      "description": "Facebook Catalog sync + Live Shopping UI for Sapo merchants.",
+      "artistStatement": "I shipped the catalog sync engine and Facebook Live Shopping UI that lets merchants broadcast products directly to customers on Facebook — no more switching between Sapo and Meta Business Manager.",
+      "lessonsLearned": "Facebook Catalog API has brutal rate limits. Batch processing with exponential backoff was added after the first production incident. Always design for rate limiting from day one.",
+      "timeline": {
+        "m1": { "title": "Facebook Shopping project started", "description": "Integrated Facebook Catalog and Live Shopping into Sapo" },
+        "m2": { "title": "Live Shopping UI completed", "description": "Merchants can now broadcast products directly to Facebook customers" }
+      }
+    },
+    "wallet-app": {
+      "description": "Fintech demo: JWT auth, Google OAuth2, transaction tracking, deployed.",
+      "artistStatement": "Built to prove I can ship a secure, production-ready auth system from scratch. JWT rotation, refresh token flow, OAuth2 callback edge cases — every scenario handled, not just the happy path.",
+      "lessonsLearned": "Token refresh logic tangled with the main auth flow caused painful refactoring in week 3. Separation of concerns from day one would have saved a full day of rework.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "Wallet app project born" },
+        "m2": { "title": "Google OAuth2 Integration", "description": "Full OAuth2 flow with refresh tokens and JWT" },
+        "m3": { "title": "Production Deploy", "description": "Live at wallet.chinh.dev" }
+      }
+    },
+    "portfolio-v2": {
+      "description": "AI-augmented full-stack portfolio: Spring Boot BE, React/TypeScript FE, CI/CD.",
+      "artistStatement": "AI-augmented from commit #1. I use Claude Code and AI tools throughout the SDLC — spec drafting, implementation, test generation, linting, security review. This portfolio is proof that AI accelerates shipping without sacrificing quality. 13 days from first commit to production. 216+ passing tests.",
+      "lessonsLearned": "BMAD agent orchestration for spec → implementation → tests is a game changer for solo developers. The test coverage is higher in 13 days than most teams achieve in 3 months.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "Project scaffolded with BMAD agent orchestration" },
+        "m2": { "title": "Production Deploy", "description": "Live at chinh.dev — CI/CD automated, tests green" }
+      }
+    },
+    "sapo-social-mobile": {
+      "description": "React Native mobile app for Sapo Social — responding to messages on the go.",
+      "artistStatement": "Mobile was never my comfort zone. React Native forced me to think in components, not pages. Shipped the message reply UI with offline-first caching so sellers never miss an inquiry.",
+      "lessonsLearned": "Offline-first on mobile is fundamentally different from web caching. The local SQLite database schema had to be redesigned twice after discovering sync conflicts in production. Offline-first is a mindset, not a library.",
+      "timeline": {
+        "m1": { "title": "Sapo Social Mobile", "description": "Built mobile UI and API integration for Sapo Social Mobile app" },
+        "m2": { "title": "Offline-First Caching Shipped", "description": "Message reply UI with local caching — sellers never miss an inquiry" }
+      }
+    },
+    "hospital-website": {
+      "description": "Full-stack hospital booking system with load balancing and MongoDB.",
+      "artistStatement": "My graduation thesis. As the project lead, I designed the load balancing architecture and built the full-stack booking flow in a 2-person team. nginx configuration for production traffic was the most valuable real-world skill I took away from this project.",
+      "lessonsLearned": "Should have defined the MongoDB schema before touching the UI. Changed the schema 3 times, which broke the frontend each time. Schema-first development — lesson permanently learned.",
+      "timeline": {
+        "m1": { "title": "Thesis Start", "description": "Hospital Website project kicked off" },
+        "m2": { "title": "Defense", "description": "Graduated with thesis on distributed hospital booking system" }
+      }
     }
   },
   "about": {
     "heading": "Why Hire Me",
-    "whyHireMe": "I build systems that are meant to stay running — not just demos that survive a presentation. My engineering philosophy is to make the invisible visible: instrumentation, CI/CD guardrails, and honest documentation of every architectural decision, including the wrong ones. I treat each project as a production system from day one, which means you get a developer who ships, monitors, and improves — not one who hands off and moves on.",
+    "whyHireMe": "I'm an AI-augmented Fullstack Engineer — not in the 'I use Copilot' sense, but in the 'AI is a first-class tool in every phase of my workflow' sense. I use AI to draft specs, generate tests, catch edge cases, and keep my output consistent at scale. The result: 216+ passing tests, CI/CD on day 13, and a portfolio that's honest about what I've built and how I built it. I'm looking for a team that values shipping with quality over shipping with noise.",
     "skills": {
-      "heading": "Verified Skills"
+      "heading": "Verified Skills",
+      "proofProject": "view proof project"
     },
     "availability": {
       "heading": "Availability",
       "open": "Open to Work",
       "selective": "Selectively Looking",
       "unavailable": "Not Available",
-      "location": "Remote · Ho Chi Minh City"
+      "location": "Hà Nội · Remote"
     },
     "githubContributions": {
       "label": "GitHub contributions",
@@ -63,6 +138,21 @@
     "viewGitHub": "View on GitHub ↗",
     "buildTimeline": "Build Timeline",
     "lessonsLearned": "What I'd do differently"
+  },
+  "statusIndicator": {
+    "live": "Live",
+    "building": "Building",
+    "archived": "Live Product"
+  },
+  "mobileSheet": {
+    "title": "Navigation",
+    "description": "Main navigation links"
+  },
+  "skipLinks": {
+    "skipToMain": "Skip to main content"
+  },
+  "successAnimation": {
+    "messageSent": "Message sent! I'll get back to you soon."
   },
   "returnVisitor": {
     "banner": {
@@ -91,5 +181,27 @@
       "messageMinLength": "Message must be at least 10 characters",
       "rateLimit": "Too many submissions, please try again tomorrow"
     }
+  },
+  "admin": {
+    "accessRequired": "Admin Access Required",
+    "accessRequiredDesc": "Please sign in with an admin account to view analytics.",
+    "authRequired": "Authentication required. Please log in.",
+    "loadFailed": "Failed to load analytics dashboard.",
+    "retry": "Retry",
+    "noData": "No analytics data available yet.",
+    "dashboardHeading": "Analytics Dashboard",
+    "period": "Period:",
+    "autoRefresh": "Auto-refreshes every 60s · Last updated",
+    "uniqueVisitors": "Unique Visitors",
+    "totalPageViews": "Total Page Views",
+    "routesTracked": "Routes Tracked",
+    "trafficSources": "Traffic Sources",
+    "pageViewsByRoute": "Page Views by Route",
+    "noPageViews": "No page views recorded yet.",
+    "route": "Route",
+    "pageViews": "Page Views",
+    "uniqueViews": "Unique Views",
+    "dailyUniqueVisitors": "Daily Unique Visitors",
+    "dashboardGenerated": "Dashboard generated at"
   }
 }

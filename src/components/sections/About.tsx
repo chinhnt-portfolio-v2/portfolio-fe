@@ -32,7 +32,7 @@ function RevealBlock({ children, delay = 0 }: RevealBlockProps) {
 }
 
 export function About() {
-  const { skills, whyHireMe } = aboutConfig
+  const { skills } = aboutConfig
   const availability = getAvailability()
   const projects = getAllProjects()
   const { t } = useTranslation()
@@ -44,7 +44,7 @@ export function About() {
         <RevealBlock delay={0}>
           <div>
             <h2 id="about-heading" className="text-2xl font-semibold mb-4">{t('about.heading')}</h2>
-            <p className="text-muted-foreground leading-relaxed">{whyHireMe}</p>
+            <p className="text-muted-foreground leading-relaxed">{t('about.whyHireMe')}</p>
           </div>
         </RevealBlock>
 
@@ -66,7 +66,7 @@ export function About() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`${skill.tech} ${skill.version} — view proof project`}
+                      aria-label={`${skill.tech} ${skill.version} — ${t('about.skills.proofProject')}`}
                       className="focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none rounded-sm"
                     >
                       <Badge variant="secondary">
