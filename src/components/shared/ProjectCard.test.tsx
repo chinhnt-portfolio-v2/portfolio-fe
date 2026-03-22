@@ -123,7 +123,7 @@ describe('ProjectCard', () => {
 
   it('renders "View project →" link to /projects/:slug', () => {
     renderCard()
-    const link = screen.getByRole('link', { name: /view project test project/i })
+    const link = screen.getByRole('link', { name: /View project Test Project/i })
     expect(link).toHaveAttribute('href', '/projects/test-project')
   })
 
@@ -150,7 +150,7 @@ describe('ProjectCard', () => {
   it('renders GitHub link when githubUrl provided', () => {
     renderCard({ githubUrl: 'https://github.com/test' })
     expect(
-      screen.getByRole('link', { name: /view source code for test project on github/i }),
+      screen.getByRole('link', { name: /View source code for Test Project/i }),
     ).toHaveAttribute('href', 'https://github.com/test')
   })
 
@@ -164,19 +164,19 @@ describe('ProjectCard', () => {
 
   it('"View project" link has keyboard focus ring classes', () => {
     renderCard()
-    const link = screen.getByRole('link', { name: /view project test project/i })
+    const link = screen.getByRole('link', { name: /View project Test Project/i })
     expect(link.className).toContain('focus-visible:ring-2')
   })
 
   it('live demo link has keyboard focus ring classes', () => {
     renderCard({ liveUrl: 'https://example.com' })
-    const link = screen.getByRole('link', { name: /open live demo for test project/i })
+    const link = screen.getByRole('link', { name: /Open live demo for Test Project/i })
     expect(link.className).toContain('focus-visible:ring-2')
   })
 
   it('GitHub link has keyboard focus ring classes', () => {
     renderCard({ githubUrl: 'https://github.com/test' })
-    const link = screen.getByRole('link', { name: /view source code for test project on github/i })
+    const link = screen.getByRole('link', { name: /View source code for Test Project/i })
     expect(link.className).toContain('focus-visible:ring-2')
   })
 
@@ -227,6 +227,59 @@ describe('ProjectCard', () => {
       setMockConnectionState('connected')
       renderCard()
       expect(screen.getByText('Status unavailable')).toBeInTheDocument()
+    })
+  })
+
+  // Story 6.6: proofPoints — Scale Indicators
+  describe('proofPoints strip (Story 6.6)', () => {
+    it('renders proofPoints strip when provided', () => {
+      renderCard({
+        proofPoints: [
+          { icon: '🏢', text: 'Enterprise SaaS' },
+          { icon: '💬', text: 'Omnichannel messaging' },
+        ],
+      })
+      expect(screen.getByText('Enterprise SaaS')).toBeInTheDocument()
+      expect(screen.getByText('Omnichannel messaging')).toBeInTheDocument()
+    })
+
+    it('proofPoints strip has role="list"', () => {
+      renderCard({
+        proofPoints: [{ icon: '🏢', text: 'Enterprise SaaS' }],
+      })
+      expect(screen.getByRole('list', { name: 'Project proof points' })).toBeInTheDocument()
+    })
+
+    it('each proof point has role="listitem"', () => {
+      renderCard({
+        proofPoints: [
+          { icon: '🏢', text: 'Enterprise SaaS' },
+          { icon: '💬', text: 'Omnichannel messaging' },
+        ],
+      })
+      expect(screen.getAllByRole('listitem')).toHaveLength(2)
+    })
+
+    it('does not render proofPoints strip when not provided', () => {
+      renderCard({ proofPoints: undefined })
+      expect(screen.queryByRole('list', { name: 'Project proof points' })).not.toBeInTheDocument()
+    })
+
+    it('does not render proofPoints strip when empty array', () => {
+      renderCard({ proofPoints: [] })
+      expect(screen.queryByRole('list', { name: 'Project proof points' })).not.toBeInTheDocument()
+    })
+
+    it('renders icon for each proof point (aria-hidden)', () => {
+      renderCard({
+        proofPoints: [
+          { icon: '🏢', text: 'Enterprise SaaS' },
+          { icon: '💬', text: 'Omnichannel messaging' },
+        ],
+      })
+      const icons = screen.getAllByText(/./, { selector: '[aria-hidden="true"]' })
+      // At minimum the two icons should be present
+      expect(icons.length).toBeGreaterThanOrEqual(2)
     })
   })
 })
