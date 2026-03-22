@@ -17,6 +17,17 @@ vi.mock('framer-motion', () => ({
   MotionConfig: ({ children }: { children: React.ReactNode }) => children,
 }))
 
+// Mock HeroStatsBar and AIWorkflowStrip (Story 6.6 additions)
+vi.mock('@/components/sections/HeroStatsBar', () => ({
+  HeroStatsBar: ({ className }: { className?: string }) =>
+    React.createElement('div', { 'data-testid': 'hero-stats-bar', className }),
+}))
+
+vi.mock('@/components/sections/AIWorkflowStrip', () => ({
+  AIWorkflowStrip: ({ className }: { className?: string }) =>
+    React.createElement('div', { 'data-testid': 'ai-workflow-strip', className }),
+}))
+
 vi.mock('@/stores/referralStore', () => ({
   useReferralStore: vi.fn(),
 }))
@@ -52,7 +63,7 @@ describe('Hero', () => {
 
   it('renders the eyebrow chip', () => {
     render(<Hero />)
-    expect(screen.getByText('⚡ Backend · Fullstack')).toBeInTheDocument()
+    expect(screen.getByText('⚡ AI-Augmented Fullstack Engineer')).toBeInTheDocument()
   })
 
   it('renders the headline with key phrase', () => {
@@ -107,7 +118,7 @@ describe('Hero', () => {
 
       render(<Hero />)
       // LinkedIn context eyebrow - must differ from default
-      expect(screen.getByText('⚡ Backend · Fullstack · Open to Work')).toBeInTheDocument()
+      expect(screen.getByText('⚡ AI-Augmented Fullstack · Open to Work')).toBeInTheDocument()
     })
 
     it('renders contextual content when referral source is cv-vn', () => {
@@ -125,7 +136,7 @@ describe('Hero', () => {
 
       render(<Hero />)
       // CV-VN context eyebrow - must differ from default
-      expect(screen.getByText('⚡ Backend · Fullstack · Sẵn Sàng Làm Việc')).toBeInTheDocument()
+      expect(screen.getByText('⚡ Kỹ Sư Fullstack Tăng Cường AI · Sẵn Sàng')).toBeInTheDocument()
     })
 
     it('renders default content when no referral source', () => {
@@ -143,7 +154,7 @@ describe('Hero', () => {
 
       render(<Hero />)
       // Default eyebrow (no contextual)
-      expect(screen.getByText('⚡ Backend · Fullstack')).toBeInTheDocument()
+      expect(screen.getByText('⚡ AI-Augmented Fullstack Engineer')).toBeInTheDocument()
     })
 
     it('adds aria-live to tagline when referral source is present', () => {

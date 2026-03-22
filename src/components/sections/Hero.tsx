@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 
+import { AIWorkflowStrip } from '@/components/sections/AIWorkflowStrip'
+import { HeroStatsBar } from '@/components/sections/HeroStatsBar'
 import { EyebrowChip } from '@/components/shared/EyebrowChip'
 import { HeroCardStack } from '@/components/shared/HeroCardStack'
 import { WelcomeBackBanner } from '@/components/shared/WelcomeBackBanner'
@@ -113,19 +115,27 @@ export function Hero() {
             </motion.div>
 
             {/* CTA row */}
-            <motion.div {...fadeUp(0.24, skipHeroAnimation)} className="flex flex-wrap items-center gap-3">
-              <a
-                href="#projects"
-                className="inline-flex items-center rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_14px_rgba(168,85,247,0.4)] transition-shadow hover:shadow-[0_0_22px_rgba(168,85,247,0.6)] focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
-              >
-                {t('hero.cta.evidence')}
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
-              >
-                {t('hero.cta.contact')}
-              </a>
+            <motion.div {...fadeUp(0.24, skipHeroAnimation)} className="flex flex-col gap-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="#projects"
+                  className="inline-flex items-center rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_14px_rgba(168,85,247,0.4)] transition-shadow hover:shadow-[0_0_22px_rgba(168,85,247,0.6)] focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
+                >
+                  {t('hero.cta.evidence')}
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
+                >
+                  {t('hero.cta.contact')}
+                </a>
+              </div>
+              <motion.div {...fadeUp(0.32, skipHeroAnimation)}>
+                <HeroStatsBar />
+              </motion.div>
+              <motion.div {...fadeUp(0.40, skipHeroAnimation)}>
+                <AIWorkflowStrip />
+              </motion.div>
             </motion.div>
           </div>
 
