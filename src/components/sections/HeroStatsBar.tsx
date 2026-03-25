@@ -11,15 +11,15 @@ export function HeroStatsBar({ className }: HeroStatsBarProps) {
       role="list"
       aria-label="Professional proof points"
       className={cn(
-        'flex flex-wrap gap-x-5 gap-y-2 border-t border-white/10 pt-4',
+        'flex flex-wrap gap-x-6 gap-y-2.5 border-t border-border pt-4.5',
         className
       )}
     >
       {HERO_STATS.map((stat, i) => (
-        <div key={i} role="listitem" className="flex items-center gap-1.5 cursor-default">
-          <span className="text-base" aria-hidden="true">{stat.icon}</span>
+        <div key={i} role="listitem" className="flex items-center gap-2 cursor-default">
+          <span className="text-[15px] leading-none" aria-hidden="true">{stat.icon}</span>
           <span
-            className="text-xs font-medium text-foreground"
+            className="text-[var(--text-small)] font-medium leading-tight text-foreground"
             title={stat.tooltip}
             aria-label={stat.label}
           >

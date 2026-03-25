@@ -68,7 +68,7 @@ export function Hero() {
       <section
         id="hero"
         aria-label="Hero"
-        className="relative overflow-hidden bg-[#050508] py-24 lg:py-32"
+        className="relative overflow-hidden bg-background py-24 lg:py-32"
       >
         {/* Ambient glows — CSS only, pointer-events: none */}
         <div
@@ -86,9 +86,9 @@ export function Hero() {
           }}
         />
 
-        <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+        <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
           {/* Left column: copy — sequential stagger */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 lg:gap-7">
             <motion.div {...fadeUp(0, skipHeroAnimation)}>
               <EyebrowChip variant="role">{eyebrow}</EyebrowChip>
             </motion.div>
@@ -104,7 +104,7 @@ export function Hero() {
 
             <motion.div {...fadeUp(0.16, skipHeroAnimation)}>
               <p
-                className="max-w-[380px] text-[13px] text-muted-foreground"
+                className="max-w-[68ch] text-[var(--text-small)] leading-[1.65] text-muted-foreground lg:max-w-[60ch]"
                 {...(referralSource && {
                   'aria-live': 'polite',
                   'aria-atomic': 'true',
@@ -115,17 +115,17 @@ export function Hero() {
             </motion.div>
 
             {/* CTA row */}
-            <motion.div {...fadeUp(0.24, skipHeroAnimation)} className="flex flex-col gap-4">
-              <div className="flex flex-wrap items-center gap-3">
+            <motion.div {...fadeUp(0.24, skipHeroAnimation)} className="flex flex-col gap-5">
+              <div className="flex flex-wrap items-center gap-3.5">
                 <a
                   href="#projects"
-                  className="inline-flex items-center rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_14px_rgba(168,85,247,0.4)] transition-shadow hover:shadow-[0_0_22px_rgba(168,85,247,0.6)] focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
+                  className="inline-flex items-center rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-brand-glow transition-shadow hover:shadow-brand-glow-hover focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
                 >
                   {t('hero.cta.evidence')}
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
+                  className="inline-flex items-center rounded-lg border border-border bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
                 >
                   {t('hero.cta.contact')}
                 </a>
@@ -150,7 +150,7 @@ export function Hero() {
             {/* Bottom fade hint on mobile (card stack overflow suggestion) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#050508] to-transparent lg:hidden"
+              className="pointer-events-none absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background to-transparent lg:hidden"
             />
           </motion.div>
         </div>

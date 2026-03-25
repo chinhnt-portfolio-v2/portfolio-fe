@@ -12,8 +12,8 @@ describe('EyebrowChip', () => {
   it('applies role variant styles by default', () => {
     render(<EyebrowChip>Test</EyebrowChip>)
     const chip = screen.getByText('Test')
-    expect(chip.className).toContain('border-purple-500/50')
-    expect(chip.className).toContain('text-purple-300')
+    expect(chip.className).toContain('border-brand/50')
+    expect(chip.className).toContain('text-brand')
   })
 
   it('applies tag variant styles when specified', () => {
