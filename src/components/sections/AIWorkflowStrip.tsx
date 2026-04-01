@@ -9,16 +9,16 @@ export function AIWorkflowStrip({ className }: AIWorkflowStripProps) {
     <div
       role="region"
       aria-label="AI-augmented development workflow"
-      className={['flex items-center gap-1 flex-wrap', className].filter(Boolean).join(' ')}
+      className={['flex flex-wrap items-start gap-x-1.5 gap-y-2', className].filter(Boolean).join(' ')}
     >
       {AI_WORKFLOW_STEPS.map((step, i) => (
-        <div key={i} className="flex items-center gap-1">
+        <div key={i} className="flex items-start gap-1">
           <div className="flex flex-col items-center">
             <span aria-hidden="true" className="text-xl leading-none">
               {step.icon}
             </span>
             <span
-              className="text-[10px] font-semibold text-foreground mt-0.5"
+              className="mt-0.5 text-[10px] font-semibold leading-tight text-foreground"
               aria-label={`${step.label}: ${step.ariaLabel}`}
             >
               {step.label}
@@ -28,7 +28,7 @@ export function AIWorkflowStrip({ className }: AIWorkflowStripProps) {
             </span>
           </div>
           {i < AI_WORKFLOW_STEPS.length - 1 && (
-            <span aria-hidden="true" className="text-muted-foreground/40 text-xs mx-0.5">→</span>
+            <span aria-hidden="true" className="mx-0.5 pt-1 text-xs text-muted-foreground/40">→</span>
           )}
         </div>
       ))}

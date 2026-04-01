@@ -18,7 +18,7 @@ interface ProjectCardProps {
   slug: string
   title: string
   description: string
-  status: 'live' | 'building' | 'archived'
+  status: 'live' | 'building' | 'live-product'
   tags: string[]
   metrics?: {
     shipDays?: number

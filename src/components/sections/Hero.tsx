@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import { AIWorkflowStrip } from '@/components/sections/AIWorkflowStrip'
 import { HeroStatsBar } from '@/components/sections/HeroStatsBar'
+import { DownloadCVButton } from '@/components/shared/DownloadCVButton'
 import { EyebrowChip } from '@/components/shared/EyebrowChip'
 import { HeroCardStack } from '@/components/shared/HeroCardStack'
 import { WelcomeBackBanner } from '@/components/shared/WelcomeBackBanner'
@@ -129,6 +130,7 @@ export function Hero() {
                 >
                   {t('hero.cta.contact')}
                 </a>
+                <DownloadCVButton />
               </div>
               <motion.div {...fadeUp(0.32, skipHeroAnimation)}>
                 <HeroStatsBar />

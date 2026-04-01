@@ -16,7 +16,7 @@ describe('projects data', () => {
       expect(typeof p.description).toBe('string')
       expect(p.tags).toBeInstanceOf(Array)
       expect(p.tags.length).toBeGreaterThan(0)
-      expect(['live', 'building', 'archived']).toContain(p.status)
+      expect(['live', 'building', 'live-product']).toContain(p.status)
     })
   })
 

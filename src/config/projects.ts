@@ -7,19 +7,19 @@
  * compatibility with existing tests and typed consumers.
  *
  * Structure:
- *   slug       — used in URL routing: /projects/:slug
- *   name       — display title
- *   techStack  — rendered as tag badges in gallery cards
- *   demoUrl    — live demo link (null if not applicable)
- *   repoUrl    — GitHub source link (null if not applicable)
- *   timeline.milestones — sorted by date automatically; title/description come from i18n
- *   hasBuildStory — enables "View Build Story" link on detail page
- *   availability — used to filter "available" projects in getAvailableProjects()
+ *   slug       - used in URL routing: /projects/:slug
+ *   name       - display title
+ *   techStack  - rendered as tag badges in gallery cards
+ *   demoUrl    - live demo link (null if not applicable)
+ *   repoUrl    - GitHub source link (null if not applicable)
+ *   timeline.milestones - sorted by date automatically; title/description come from i18n
+ *   hasBuildStory - enables "View Build Story" link on detail page
+ *   availability - used to filter "available" projects in getAvailableProjects()
  */
 
 export interface TimelineMilestone {
   date: string // ISO 8601: YYYY-MM-DD
-  /** i18n key suffix — renders t('projects.{slug}.timeline.{key}.title/description') */
+  /** i18n key suffix - renders t('projects.{slug}.timeline.{key}.title/description') */
   key: string
 }
 
@@ -38,7 +38,7 @@ export interface ProjectProofPoint {
 export interface Project {
   slug: string
   name: string
-  /** Alias for name — used by existing gallery components */
+  /** Alias for name - used by existing gallery components */
   title: string
   /** Short text (≤80 chars recommended for gallery card). Source of truth: i18n. */
   description: string
@@ -53,37 +53,37 @@ export interface Project {
   hasBuildStory: boolean
   availability: ProjectAvailability
   /** Gallery card display */
-  status: 'live' | 'building' | 'archived'
+  status: 'live' | 'building' | 'live-product'
   /** Appears in the "Featured" filter tab */
   featured?: boolean
   /** Static build metrics shown on the card */
   metrics?: ProjectMetrics
   /** Opt-out of WebSocket live metrics section (for internal/company projects) */
   hasLiveMetrics?: boolean
-  /** Alias for techStack — used by existing gallery components */
+  /** Alias for techStack - used by existing gallery components */
   tags: string[]
-  /** Alias for demoUrl — used by existing card components */
+  /** Alias for demoUrl - used by existing card components */
   liveUrl?: string
-  /** Alias for repoUrl — used by existing card components */
+  /** Alias for repoUrl - used by existing card components */
   githubUrl?: string
   /** Source of truth: i18n. */
   lessonsLearned?: string
-  /** Production scale indicators — shown below description */
+  /** Production scale indicators - shown below description */
   proofPoints?: ProjectProofPoint[]
 }
 
 // ---------------------------------------------------------------------------
-// Config entries — real data reflecting Chính's actual background
+// Config entries - real data reflecting Chính's actual background
 // ---------------------------------------------------------------------------
 export const projects: Project[] = [
-  // 1. sapo-social-channel — archived, featured
+  // 1. sapo-social-channel — live-product, featured
   {
     slug: 'sapo-social-channel',
     name: 'Sapo Social Channel',
     title: 'Sapo Social Channel',
     description: '', // i18n: projects.sapo-social-channel.description
-    techStack: ['ReactJS', 'Java Spring Boot', 'MongoDB', 'Kafka', 'RabbitMQ', 'Redux', 'Grafana'],
-    tags: ['ReactJS', 'Java Spring Boot', 'MongoDB', 'Kafka', 'RabbitMQ', 'Redux', 'Grafana'],
+    techStack: ['ReactJS', 'Spring Boot', 'MongoDB', 'Kafka', 'RabbitMQ', 'Redux', 'Grafana'],
+    tags: ['ReactJS', 'Spring Boot', 'MongoDB', 'Kafka', 'RabbitMQ', 'Redux', 'Grafana'],
     demoUrl: null,
     repoUrl: null,
     liveUrl: undefined,
@@ -98,7 +98,7 @@ export const projects: Project[] = [
     },
     hasBuildStory: false,
     availability: 'not-available',
-    status: 'archived',
+    status: 'live-product',
     featured: true,
     metrics: undefined,
     hasLiveMetrics: false,
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     ],
   },
 
-  // 2. facebook-shopping — archived, featured
+  // 2. facebook-shopping — live-product, featured
   {
     slug: 'facebook-shopping',
     name: 'Facebook Catalog & Live Shopping',
@@ -131,7 +131,7 @@ export const projects: Project[] = [
     },
     hasBuildStory: false,
     availability: 'not-available',
-    status: 'archived',
+    status: 'live-product',
     featured: true,
     metrics: undefined,
     hasLiveMetrics: false,
@@ -142,7 +142,7 @@ export const projects: Project[] = [
     ],
   },
 
-  // 3. wallet-app — live, featured
+  // 3. wallet-app - live, featured
   {
     slug: 'wallet-app',
     name: 'Wallet App',
@@ -150,32 +150,32 @@ export const projects: Project[] = [
     description: '', // i18n: projects.wallet-app.description
     techStack: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'JWT', 'OAuth2'],
     tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'JWT', 'OAuth2'],
-    demoUrl: 'https://wallet.chinh.dev',
-    repoUrl: 'https://github.com/chinh-dev11/wallet-app',
-    liveUrl: 'https://wallet.chinh.dev',
-    githubUrl: 'https://github.com/chinh-dev11/wallet-app',
+    demoUrl: 'https://wallet-fe-two.vercel.app',
+    repoUrl: 'https://github.com/chinhnt-portfolio-v2/wallet-fe',
+    liveUrl: 'https://wallet-fe-two.vercel.app',
+    githubUrl: 'https://github.com/chinhnt-portfolio-v2/wallet-fe',
     artistStatement: '', // i18n: projects.wallet-app.artistStatement
     timeline: {
       milestones: [
-        { date: '2025-08-01', key: 'm1' },
-        { date: '2025-09-01', key: 'm2' },
-        { date: '2025-10-01', key: 'm3' },
+        { date: '2026-03-26', key: 'm1' },
+        { date: '2026-04-01', key: 'm2' },
+        { date: '2026-04-01', key: 'm3' },
       ],
     },
     hasBuildStory: false,
     availability: 'available',
     status: 'live',
     featured: true,
-    metrics: { shipDays: 60, uptimeDays: 150 },
+    metrics: { shipDays: 6, uptimeDays: 0 },
     lessonsLearned: '', // i18n: projects.wallet-app.lessonsLearned
     proofPoints: [
       { icon: '🔐', text: 'JWT + OAuth2' },
       { icon: '🔄', text: 'Token refresh flow' },
-      { icon: '💰', text: 'Live at wallet.chinh.dev' },
+      { icon: '💰', text: 'Live at wallet-fe' },
     ],
   },
 
-  // 4. portfolio-v2 — building, featured
+  // 4. portfolio-v2 — live, featured
   {
     slug: 'portfolio-v2',
     name: 'Portfolio v2',
@@ -184,19 +184,19 @@ export const projects: Project[] = [
     techStack: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'WebSocket', 'GitHub Actions'],
     tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'WebSocket', 'GitHub Actions'],
     demoUrl: null,
-    repoUrl: 'https://github.com/chinh-dev11/portfolio-v2',
-    liveUrl: undefined,
-    githubUrl: 'https://github.com/chinh-dev11/portfolio-v2',
+    repoUrl: 'https://github.com/chinhnt-portfolio-v2/portfolio-fe',
+    liveUrl: 'https://chinhnt-portfolio.vercel.app',
+    githubUrl: 'https://github.com/chinhnt-portfolio-v2/portfolio-fe',
     artistStatement: '', // i18n: projects.portfolio-v2.artistStatement
     timeline: {
       milestones: [
-        { date: '2026-03-07', key: 'm1' },
-        { date: '2026-03-13', key: 'm2' },
+        { date: '2026-03-12', key: 'm1' },
+        { date: '2026-03-25', key: 'm2' },
       ],
     },
     hasBuildStory: false,
     availability: 'open-to-roles',
-    status: 'building',
+    status: 'live',
     featured: true,
     metrics: { shipDays: 13, uptimeDays: 7 },
     lessonsLearned: '', // i18n: projects.portfolio-v2.lessonsLearned
@@ -207,7 +207,7 @@ export const projects: Project[] = [
     ],
   },
 
-  // 5. sapo-social-mobile — archived, not featured
+  // 5. sapo-social-mobile — live-product, not featured
   {
     slug: 'sapo-social-mobile',
     name: 'Sapo Social Mobile',
@@ -228,7 +228,7 @@ export const projects: Project[] = [
     },
     hasBuildStory: false,
     availability: 'not-available',
-    status: 'archived',
+    status: 'live-product',
     featured: false,
     metrics: undefined,
     lessonsLearned: '', // i18n: projects.sapo-social-mobile.lessonsLearned
@@ -238,7 +238,7 @@ export const projects: Project[] = [
     ],
   },
 
-  // 6. hospital-website — archived, not featured
+  // 6. hospital-website — live-product, not featured
   {
     slug: 'hospital-website',
     name: 'Hospital Website Application',
@@ -259,12 +259,12 @@ export const projects: Project[] = [
     },
     hasBuildStory: false,
     availability: 'not-available',
-    status: 'archived',
+    status: 'live-product',
     featured: false,
     metrics: undefined,
     lessonsLearned: '', // i18n: projects.hospital-website.lessonsLearned
     proofPoints: [
-      { icon: '⚖️', text: 'Load balancing' },
+      { icon: '⚙️', text: 'Load balancing' },
       { icon: '🗄️', text: 'nginx production' },
       { icon: '🎓', text: 'Graduation thesis' },
     ],
@@ -272,7 +272,7 @@ export const projects: Project[] = [
 ]
 
 // ---------------------------------------------------------------------------
-// Runtime validation — enforce unique slugs
+// Runtime validation - enforce unique slugs
 // ---------------------------------------------------------------------------
 const slugs = projects.map((p) => p.slug)
 const duplicates = slugs.filter((s, i) => slugs.indexOf(s) !== i)

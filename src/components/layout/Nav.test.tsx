@@ -55,9 +55,9 @@ describe('Nav', () => {
   it('renders all desktop navigation links with translated labels', () => {
     render(<Nav />)
     // Translation mock returns English values from en.json
-    expect(screen.getByRole('link', { name: 'Projects' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'About' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Contact' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Projects' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'About' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Contact' })).toBeInTheDocument()
   })
 
   it('shows moon icon in light mode with correct aria-label', () => {
@@ -102,14 +102,14 @@ describe('Nav', () => {
     expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument()
   })
 
-  it('desktop nav links are rendered as anchor elements (keyboard-reachable)', () => {
+  it('desktop nav links are rendered as button elements for smooth scroll', () => {
     render(<Nav />)
-    const projectsLink = screen.getByRole('link', { name: 'Projects' })
-    const aboutLink = screen.getByRole('link', { name: 'About' })
-    const contactLink = screen.getByRole('link', { name: 'Contact' })
-    expect(projectsLink.tagName).toBe('A')
-    expect(aboutLink.tagName).toBe('A')
-    expect(contactLink.tagName).toBe('A')
+    const projectsBtn = screen.getByRole('button', { name: 'Projects' })
+    const aboutBtn = screen.getByRole('button', { name: 'About' })
+    const contactBtn = screen.getByRole('button', { name: 'Contact' })
+    expect(projectsBtn.tagName).toBe('BUTTON')
+    expect(aboutBtn.tagName).toBe('BUTTON')
+    expect(contactBtn.tagName).toBe('BUTTON')
   })
 
   it('logo link has keyboard focus ring classes', () => {

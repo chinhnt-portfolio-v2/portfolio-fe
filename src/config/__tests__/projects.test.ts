@@ -31,7 +31,7 @@ describe('projects data', () => {
       expect(typeof p.artistStatement).toBe('string')
       expect(typeof p.hasBuildStory).toBe('boolean')
       expect(['available', 'not-available', 'open-to-roles']).toContain(p.availability)
-      expect(['live', 'building', 'archived']).toContain(p.status)
+      expect(['live', 'building', 'live-product']).toContain(p.status)
       expect(p.timeline).toBeDefined()
       expect(Array.isArray(p.timeline.milestones)).toBe(true)
     }

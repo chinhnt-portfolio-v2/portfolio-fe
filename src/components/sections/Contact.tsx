@@ -11,19 +11,19 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-16 md:py-24"
+      className="py-20 md:py-24"
       aria-labelledby="contact-heading"
       aria-label="Contact"
     >
-      <div className="container mx-auto max-w-2xl px-4">
-        <div className="mb-12 text-center">
+      <div className="section-container max-w-2xl">
+        <div className="mx-auto mb-12 max-w-[68ch] text-center">
           <h2
             id="contact-heading"
-            className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl"
+            className="mb-4 text-[var(--text-h1)] font-[var(--font-weight-h1)] tracking-[var(--letter-spacing-h1)] leading-tight text-foreground"
           >
             {t('contact.heading')}
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-[var(--text-body)] leading-[1.65] text-muted-foreground">
             {t('contact.subheading')}
           </p>
         </div>

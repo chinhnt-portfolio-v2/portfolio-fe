@@ -38,23 +38,32 @@ export function About() {
   const { t } = useTranslation()
 
   return (
-    <section id="about" aria-labelledby="about-heading" className="section-container py-24">
-      <div className="max-w-2xl mx-auto space-y-10">
+    <section id="about" aria-labelledby="about-heading" className="section-container py-20 md:py-24">
+      <div className="mx-auto max-w-2xl space-y-12">
         {/* Why Hire Me */}
         <RevealBlock delay={0}>
           <div>
-            <h2 id="about-heading" className="text-2xl font-semibold mb-4">{t('about.heading')}</h2>
-            <p className="text-muted-foreground leading-relaxed">{t('about.whyHireMe')}</p>
+            <h2
+              id="about-heading"
+              className="mb-4 text-[var(--text-h1)] font-[var(--font-weight-h1)] tracking-[var(--letter-spacing-h1)] leading-tight text-foreground"
+            >
+              {t('about.heading')}
+            </h2>
+            <p className="max-w-[68ch] text-[var(--text-body)] leading-[1.65] text-muted-foreground">
+              {t('about.whyHireMe')}
+            </p>
           </div>
         </RevealBlock>
 
         {/* Skills with proof */}
         <RevealBlock delay={0.05}>
           <div>
-            <h3 className="text-lg font-medium mb-3">{t('about.skills.heading')}</h3>
+            <h3 className="mb-3 text-[var(--text-h3)] font-[var(--font-weight-h3)] tracking-[var(--letter-spacing-h3)] text-foreground">
+              {t('about.skills.heading')}
+            </h3>
             <ul
               role="list"
-              className="flex flex-wrap gap-2 list-none p-0 m-0"
+              className="m-0 flex flex-wrap gap-2.5 list-none p-0"
               aria-label="Verified skills with proof"
             >
               {skills.map((skill) => {
@@ -83,8 +92,10 @@ export function About() {
         {/* Availability */}
         <RevealBlock delay={0.10}>
           <div>
-            <h3 className="text-lg font-medium mb-3">{t('about.availability.heading')}</h3>
-            <div className="flex items-center gap-3">
+            <h3 className="mb-3 text-[var(--text-h3)] font-[var(--font-weight-h3)] tracking-[var(--letter-spacing-h3)] text-foreground">
+              {t('about.availability.heading')}
+            </h3>
+            <div className="flex flex-wrap items-center gap-3">
               <span
                 className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium text-white"
                 style={{ backgroundColor: STATUS_COLOR[availability.status] ?? '#6B7280' }}
@@ -93,7 +104,9 @@ export function About() {
                 <span className="h-2 w-2 rounded-full bg-white opacity-80" aria-hidden="true" />
                 {t(`about.availability.${STATUS_KEY[availability.status]}`)}
               </span>
-              <span className="text-muted-foreground text-sm">{availability.location}</span>
+              <span className="text-[var(--text-small)] text-muted-foreground">
+                {availability.location}
+              </span>
             </div>
           </div>
         </RevealBlock>

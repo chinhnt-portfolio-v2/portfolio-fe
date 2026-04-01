@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 
 import { cn } from '@/lib/utils'
 
-type Status = 'live' | 'building' | 'archived'
+type Status = 'live' | 'building' | 'live-product'
 
 interface StatusIndicatorProps {
   status: Status
@@ -15,7 +15,7 @@ export function StatusIndicator({ status, className }: StatusIndicatorProps) {
   const dotConfig: Record<Status, { dotClass: string; pulse: boolean }> = {
     live: { dotClass: 'bg-live', pulse: true },
     building: { dotClass: 'bg-warning', pulse: false },
-    archived: { dotClass: 'bg-muted-foreground', pulse: false },
+    'live-product': { dotClass: 'bg-muted-foreground', pulse: false },
   }
 
   const dot = dotConfig[status]

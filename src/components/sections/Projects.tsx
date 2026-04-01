@@ -83,14 +83,14 @@ export function Projects() {
   }
 
   return (
-    <section id="projects" aria-label="Projects" className="py-24">
+    <section id="projects" aria-label="Projects" className="py-20 md:py-24">
       <div className="section-container">
-        <h2 className="mb-10 text-[var(--text-h1)] font-[var(--font-weight-h1)] tracking-[var(--letter-spacing-h1)] text-foreground">
+        <h2 className="mb-8 md:mb-10 text-[var(--text-h1)] font-[var(--font-weight-h1)] tracking-[var(--letter-spacing-h1)] leading-tight text-foreground">
           {t('projects.heading')}
         </h2>
 
         {/* FilterChips */}
-        <div role="group" aria-label="Filter projects" className="mb-8 flex flex-wrap gap-2">
+        <div role="group" aria-label="Filter projects" className="mb-7 md:mb-8 flex flex-wrap gap-2.5">
           <FilterChip
             label={t('projects.filter.all')}
             isActive={activeFilter === null}

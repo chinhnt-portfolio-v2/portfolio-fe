@@ -15,7 +15,8 @@
     "tagline": "Tôi ship hệ thống production với AI như cộng sự lập trình. 216+ test, CI/CD ngày 13.",
     "cta": {
       "evidence": "Xem dự án",
-      "contact": "Liên hệ"
+      "contact": "Liên hệ",
+      "downloadCV": "Tải CV"
     },
     "heroCard": {
       "projectsShipped": "dự án đã ship",
@@ -76,9 +77,9 @@
       "artistStatement": "Được xây dựng để chứng minh tôi có thể ship một hệ thống auth bảo mật, production-ready từ đầu. JWT rotation, refresh token flow, OAuth2 callback edge cases — mọi scenario đều được xử lý, không chỉ happy path.",
       "lessonsLearned": "Token refresh logic rối với main auth flow gây refactoring đau đớn ở tuần 3. Separation of concerns từ ngày một sẽ tiết kiệm một ngày làm việc.",
       "timeline": {
-        "m1": { "title": "First Commit", "description": "Wallet app project born" },
-        "m2": { "title": "Google OAuth2 Integration", "description": "Full OAuth2 flow với refresh tokens và JWT" },
-        "m3": { "title": "Production Deploy", "description": "Live tại wallet.chinh.dev" }
+        "m1": { "title": "First Commit", "description": "Wallet app project born — 26 Mar 2026" },
+        "m2": { "title": "Backend Deploy", "description": "Spring Boot BE deployed trên GCP Cloud Run" },
+        "m3": { "title": "Production Deploy", "description": "Live tại wallet-fe-two.vercel.app — 1 Apr 2026" }
       }
     },
     "portfolio-v2": {
@@ -87,7 +88,7 @@
       "lessonsLearned": "BMAD agent orchestration cho spec → implementation → tests là game changer cho solo developers. Test coverage cao hơn trong 13 ngày so với hầu hết các team trong 3 tháng.",
       "timeline": {
         "m1": { "title": "First Commit", "description": "Project được scaffold với BMAD agent orchestration" },
-        "m2": { "title": "Production Deploy", "description": "Live tại chinh.dev — CI/CD tự động, tests green" }
+        "m2": { "title": "Production Deploy", "description": "Live tại chinhnt-portfolio.vercel.app — CI/CD tự động, tests green" }
       }
     },
     "sapo-social-mobile": {
@@ -142,7 +143,7 @@
   "statusIndicator": {
     "live": "Live",
     "building": "Đang xây dựng",
-    "archived": "Sản phẩm Live"
+    "live-product": "Sản phẩm Live"
   },
   "mobileSheet": {
     "title": "Điều hướng",

@@ -18,8 +18,8 @@ export function FilterChip({ label, isActive, onClick, className }: FilterChipPr
         'min-h-[44px]',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2',
         isActive
-          ? 'border-brand bg-brand text-white'
-          : 'border-border text-muted-foreground hover:border-brand/50 hover:bg-brand/10',
+          ? 'border-brand bg-brand text-white shadow-[0_0_14px_rgba(168,85,247,0.3)]'
+          : 'border-border text-muted-foreground hover:border-brand/50 hover:bg-brand/10 hover:shadow-[0_0_14px_rgba(168,85,247,0.15)]',
         className,
       )}
     >

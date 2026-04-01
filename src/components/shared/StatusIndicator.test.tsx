@@ -14,8 +14,8 @@ describe('StatusIndicator', () => {
     expect(screen.getByText('Building')).toBeInTheDocument()
   })
 
-  it('renders "Live Product" label for archived status', () => {
-    render(<StatusIndicator status="archived" />)
+  it('renders "Live Product" label for live-product status', () => {
+    render(<StatusIndicator status="live-product" />)
     expect(screen.getByText('Live Product')).toBeInTheDocument()
   })
 
@@ -36,7 +36,7 @@ describe('StatusIndicator', () => {
     rerender(<StatusIndicator status="building" />)
     expect(container.querySelector('.status-pulse')).toBeNull()
 
-    rerender(<StatusIndicator status="archived" />)
+    rerender(<StatusIndicator status="live-product" />)
     expect(container.querySelector('.status-pulse')).toBeNull()
   })
 })

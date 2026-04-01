@@ -173,7 +173,7 @@ describe('Hero', () => {
       render(<Hero />)
       // The tagline element should have aria-live when referral source exists
       const paragraph = screen.getByText((content, element) => {
-        return element?.tagName === 'P' && element.className.includes('max-w-[380px]')
+        return element?.tagName === 'P' && element.className.includes('text-muted-foreground')
       })
       expect(paragraph).toHaveAttribute('aria-live', 'polite')
     })
@@ -193,7 +193,7 @@ describe('Hero', () => {
 
       render(<Hero />)
       const paragraph = screen.getByText((content, element) => {
-        return element?.tagName === 'P' && element.className.includes('max-w-[380px]')
+        return element?.tagName === 'P' && element.className.includes('text-muted-foreground')
       })
       expect(paragraph).not.toHaveAttribute('aria-live')
     })

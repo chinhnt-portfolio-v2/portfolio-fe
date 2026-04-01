@@ -80,11 +80,11 @@ describe('ProjectDetailPage', () => {
     expect(liveLink).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
-  it('renders disabled live link for building project with "Live soon" badge', () => {
+  it('renders live link for portfolio-v2 (status: live, has liveUrl)', () => {
     renderWithRouter('portfolio-v2')
-    // No live link — should show disabled state
-    expect(screen.queryByRole('link', { name: /view live/i })).not.toBeInTheDocument()
-    expect(screen.getByText(/live soon/i)).toBeInTheDocument()
+    const liveLink = screen.getByRole('link', { name: /view live/i })
+    expect(liveLink).toBeInTheDocument()
+    expect(liveLink).toHaveAttribute('href', 'https://chinhnt-portfolio.vercel.app')
   })
 
   it('renders GitHub link with correct attributes', () => {
@@ -100,7 +100,7 @@ describe('ProjectDetailPage', () => {
     expect(screen.getByText('Spring Boot')).toBeInTheDocument()
   })
 
-  it('does not render "Live soon" badge for archived project without liveUrl', () => {
+  it('does not render "Live soon" badge for live-product project without liveUrl', () => {
     renderWithRouter('portfolio-v1')
     expect(screen.queryByRole('link', { name: /view live/i })).not.toBeInTheDocument()
     expect(screen.queryByText(/live soon/i)).not.toBeInTheDocument()

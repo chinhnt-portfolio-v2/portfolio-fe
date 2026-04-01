@@ -15,7 +15,8 @@
     "tagline": "I ship production systems with AI as my pair programmer. 216+ tests, CI/CD on day 13.",
     "cta": {
       "evidence": "See the evidence",
-      "contact": "Get in touch"
+      "contact": "Get in touch",
+      "downloadCV": "Download CV"
     },
     "heroCard": {
       "projectsShipped": "projects shipped",
@@ -76,9 +77,9 @@
       "artistStatement": "Built to prove I can ship a secure, production-ready auth system from scratch. JWT rotation, refresh token flow, OAuth2 callback edge cases — every scenario handled, not just the happy path.",
       "lessonsLearned": "Token refresh logic tangled with the main auth flow caused painful refactoring in week 3. Separation of concerns from day one would have saved a full day of rework.",
       "timeline": {
-        "m1": { "title": "First Commit", "description": "Wallet app project born" },
-        "m2": { "title": "Google OAuth2 Integration", "description": "Full OAuth2 flow with refresh tokens and JWT" },
-        "m3": { "title": "Production Deploy", "description": "Live at wallet.chinh.dev" }
+        "m1": { "title": "First Commit", "description": "Wallet app project born — 26 Mar 2026" },
+        "m2": { "title": "Backend Deploy", "description": "Spring Boot BE deployed on GCP Cloud Run" },
+        "m3": { "title": "Production Deploy", "description": "Live at wallet-fe-two.vercel.app — 1 Apr 2026" }
       }
     },
     "portfolio-v2": {
@@ -87,7 +88,7 @@
       "lessonsLearned": "BMAD agent orchestration for spec → implementation → tests is a game changer for solo developers. The test coverage is higher in 13 days than most teams achieve in 3 months.",
       "timeline": {
         "m1": { "title": "First Commit", "description": "Project scaffolded with BMAD agent orchestration" },
-        "m2": { "title": "Production Deploy", "description": "Live at chinh.dev — CI/CD automated, tests green" }
+        "m2": { "title": "Production Deploy", "description": "Live at chinhnt-portfolio.vercel.app — CI/CD automated, tests green" }
       }
     },
     "sapo-social-mobile": {
@@ -142,7 +143,7 @@
   "statusIndicator": {
     "live": "Live",
     "building": "Building",
-    "archived": "Live Product"
+    "live-product": "Live Product"
   },
   "mobileSheet": {
     "title": "Navigation",

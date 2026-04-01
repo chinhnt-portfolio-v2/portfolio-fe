@@ -89,20 +89,20 @@ async function sendEvent(event: AnalyticsEvent): Promise<void> {
   try {
     const payload = JSON.stringify(event)
 
-    // Prefer sendBeacon for page-load events (survives navigation)
-    if (navigator.sendBeacon) {
-      const blob = new Blob([payload], { type: 'application/json' })
-      navigator.sendBeacon(ANALYTICS_TRACK_URL, blob)
-    } else {
-      // Fallback for environments without sendBeacon
-      await fetch(ANALYTICS_TRACK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: payload,
-        // keepalive=true ensures the request survives page unload
-        keepalive: true,
-      }).catch(() => {/* swallow */})
-    }
+    // Use fetch with keepalive instead of sendBeacon.
+    // sendBeacon sends cookies/credentials by default, which causes CORS to
+    // fail when the server responds with "Access-Control-Allow-Origin: *"
+    // (browser blocks the response when credentials + wildcard origin mismatch).
+    // fetch + credentials: 'omit' sends no cookies → no credential-related CORS issues.
+    await fetch(ANALYTICS_TRACK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: payload,
+      // keepalive=true ensures the request survives page unload
+      keepalive: true,
+      // No credentials — analytics is anonymous, no auth cookies needed
+      credentials: 'omit',
+    }).catch(() => {/* swallow */})
   } catch {
     // Intentionally silent — analytics must never break the UX
   }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { Menu, Moon, Sun } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -9,9 +9,9 @@ import { useLanguageStore } from '@/stores/languageStore'
 import { useThemeStore } from '@/stores/themeStore'
 
 const NAV_LINK_DEFS = [
-  { href: '#projects', labelKey: 'projects' },
-  { href: '#about', labelKey: 'about' },
-  { href: '#contact', labelKey: 'contact' },
+  { sectionId: 'projects', labelKey: 'projects' },
+  { sectionId: 'about',    labelKey: 'about' },
+  { sectionId: 'contact', labelKey: 'contact' },
 ] as const
 
 function ThemeToggle() {
@@ -55,39 +55,64 @@ function LanguageToggle() {
   )
 }
 
+/** Scrolls to a section element, handling both same-page and cross-page (router push) cases. */
+function scrollToSection(sectionId: string) {
+  // If already on the home page, scroll directly
+  if (window.location.pathname === '/') {
+    const el = document.getElementById(sectionId)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  } else {
+    // Navigate home then scroll — push state so the hash doesn't create a history entry
+    const target = `${window.location.origin}/#${sectionId}`
+    window.location.href = target
+  }
+}
+
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { t } = useTranslation()
 
-  const navLinks = NAV_LINK_DEFS.map((link) => ({
-    href: link.href,
+  const navItems = NAV_LINK_DEFS.map((link) => ({
+    sectionId: link.sectionId,
     label: t(`nav.${link.labelKey}`),
   }))
+
+  const handleNavClick = useCallback((sectionId: string) => {
+    setMobileOpen(false)
+    scrollToSection(sectionId)
+  }, [])
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-brand/10">
       <nav
         aria-label="Main navigation"
-        className="flex items-center justify-between h-16 px-5 md:px-10 lg:px-16 max-w-[1200px] mx-auto"
+        className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 md:px-10 lg:px-16"
       >
         {/* Logo */}
         <a
           href="/"
-          className="font-bold text-lg tracking-tight focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none rounded-sm"
+          className="rounded-sm text-lg font-bold tracking-tight focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
+          onClick={(e) => {
+            e.preventDefault()
+            scrollToSection('')
+          }}
         >
           portfolio.
         </a>
 
         {/* Desktop nav links */}
-        <ul className="hidden md:flex items-center gap-6" role="list">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none rounded-sm"
+        <ul className="hidden items-center gap-7 md:flex" role="list">
+          {navItems.map((item) => (
+            <li key={item.sectionId}>
+              <button
+                type="button"
+                onClick={() => scrollToSection(item.sectionId)}
+                className="cursor-pointer rounded-sm border-none bg-transparent p-0 text-[var(--text-small)] text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
               >
-                {link.label}
-              </a>
+                {item.label}
+              </button>
             </li>
           ))}
         </ul>
@@ -115,7 +140,8 @@ export function Nav() {
       <MobileSheet
         isOpen={mobileOpen}
         onClose={() => setMobileOpen(false)}
-        navLinks={navLinks}
+        navItems={navItems}
+        onNavClick={handleNavClick}
       />
     </header>
   )
