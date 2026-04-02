@@ -1,13 +1,11 @@
 import { useTranslation } from 'react-i18next'
 
-const CV_URL = 'https://drive.google.com/file/d/1nrNZTZ0mnWmOM9LSwU11rcB6rT0ewbDF/view?usp=drive_link'
-
 export function DownloadCVButton() {
   const { t } = useTranslation()
 
   return (
     <a
-      href={CV_URL}
+      href={t('hero.cta.cvUrl')}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={t('hero.cta.downloadCV')}

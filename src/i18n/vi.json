@@ -16,7 +16,8 @@
     "cta": {
       "evidence": "Xem dự án",
       "contact": "Liên hệ",
-      "downloadCV": "Tải CV"
+      "downloadCV": "Tải CV",
+      "cvUrl": "https://drive.google.com/file/d/1B9IxOIII5YCFrBgYl7lOvzvm5mQArYm2/view?usp=sharing"
     },
     "heroCard": {
       "projectsShipped": "dự án đã ship",

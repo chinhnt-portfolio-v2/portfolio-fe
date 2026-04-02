@@ -16,7 +16,8 @@
     "cta": {
       "evidence": "See the evidence",
       "contact": "Get in touch",
-      "downloadCV": "Download CV"
+      "downloadCV": "Download CV",
+      "cvUrl": "https://drive.google.com/file/d/1al4HPnZR8-048IUJ92IXraSvbDI2eq7m/view?usp=sharing"
     },
     "heroCard": {
       "projectsShipped": "projects shipped",
