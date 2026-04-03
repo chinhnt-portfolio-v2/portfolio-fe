@@ -1,24 +1,18 @@
 import { useEffect, useRef } from 'react'
 
-import { useMotionValue } from 'framer-motion'
-
-import { useCursorStore } from '@/stores/cursorStore'
+import { useCursorStore, cursorX, cursorY } from '@/stores/cursorStore'
 
 /**
- * Attaches global mouse-move and mouse-down listeners to update the cursor store.
+ * Attaches global mouse-move and mouse-down listeners.
+ *
+ * cursorX/Y are updated on every mousemove via rAF — no React re-renders,
+ * no Zustand store writes for x/y. Zustand only holds isHovering/isClicking/cursorType.
  *
  * Guards:
  * - Touch devices: skips listener registration entirely
- * - Always registers listeners; the `data-cursor-active` guard only controls whether
- *   the CustomCursor component renders — not whether events are tracked
- *   (tracking can start before the UI renders without any downside).
  */
 export function useCustomCursor() {
-  const { setPosition, setClicking } = useCursorStore()
-
-  const x = useMotionValue(-100)
-  const y = useMotionValue(-100)
-
+  const { setClicking } = useCursorStore()
   const isTouchRef = useRef(false)
 
   useEffect(() => {
@@ -28,19 +22,17 @@ export function useCustomCursor() {
 
     if (isTouchRef.current) return
 
+    // rAF-synced mousemove — update MotionValues directly.
+    // No React state, no Zustand → zero-overhead for the render thread.
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition(e.clientX, e.clientY)
+      requestAnimationFrame(() => {
+        cursorX.set(e.clientX)
+        cursorY.set(e.clientY)
+      })
     }
 
-    const handleMouseDown = () => {
-      setClicking(true)
-    }
-
-    const handleMouseUp = () => {
-      setClicking(false)
-    }
-
-    // Track hovering globally via document enter/leave
+    const handleMouseDown = () => setClicking(true)
+    const handleMouseUp = () => setClicking(false)
     const handleDocumentEnter = () => useCursorStore.getState().setHovering(true)
     const handleDocumentLeave = () => useCursorStore.getState().setHovering(false)
 
@@ -57,18 +49,5 @@ export function useCustomCursor() {
       document.removeEventListener('mouseenter', handleDocumentEnter)
       document.removeEventListener('mouseleave', handleDocumentLeave)
     }
-  }, [setPosition, setClicking])
-
-  return { x, y }
-}
-
-/** Raw event handler refs — exportable for manual attachment if needed */
-export const rawMouseMoveHandler = (e: MouseEvent) => {
-  useCursorStore.getState().setPosition(e.clientX, e.clientY)
-}
-export const rawMouseDownHandler = () => {
-  useCursorStore.getState().setClicking(true)
-}
-export const rawMouseUpHandler = () => {
-  useCursorStore.getState().setClicking(false)
+  }, [setClicking])
 }

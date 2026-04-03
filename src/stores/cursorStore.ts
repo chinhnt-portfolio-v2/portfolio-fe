@@ -1,3 +1,5 @@
+import { motionValue } from 'framer-motion'
+
 import { create } from 'zustand'
 
 export type CursorType = 'default' | 'pointer' | 'project' | 'external'
@@ -29,3 +31,9 @@ export const useCursorStore = create<CursorState>((set) => ({
   setClicking: (isClicking) => set({ isClicking }),
   setLabel: (label) => set({ label }),
 }))
+
+// Module-level MotionValue singletons — shared across all consumers.
+// useCustomCursor writes to them via rAF; CustomCursor reads via useSpring.
+// No React re-renders for x/y → zero-lag cursor tracking.
+export const cursorX = motionValue(-100)
+export const cursorY = motionValue(-100)

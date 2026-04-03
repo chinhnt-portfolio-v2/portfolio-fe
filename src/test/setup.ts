@@ -47,6 +47,50 @@ vi.mock('react-i18next', async (importOriginal) => {
   }
 })
 
+// ─── framer-motion mock ─────────────────────────────────────────────────────────
+// Provides all exports needed by cursor system + existing motion usage in tests.
+// motion.div etc. return actual React elements so components using them render correctly.
+import * as React from 'react'
+
+// Reusable motion element — renders as a plain div with children (no animation in tests)
+function mockMotion(props: Record<string, unknown>) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return React.createElement('div', null, props.children as React.ReactNode)
+}
+
+vi.mock('framer-motion', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('framer-motion')>()
+  return {
+    ...actual,
+    motion: {
+      ...actual.motion,
+      div: mockMotion,
+      article: mockMotion,
+      span: mockMotion,
+      button: mockMotion,
+      nav: mockMotion,
+      ul: mockMotion,
+      li: mockMotion,
+      h1: mockMotion,
+      h2: mockMotion,
+      p: mockMotion,
+      a: mockMotion,
+      img: mockMotion,
+      svg: mockMotion,
+      path: mockMotion,
+      circle: mockMotion,
+      rect: mockMotion,
+    },
+    AnimatePresence: ({ children }: { children: unknown }) => children,
+    MotionConfig: ({ children }: { children: unknown }) => children,
+    useMotionValue: () => ({ value: -100, set: vi.fn() }),
+    useSpring: (mv: unknown) => mv,
+    useTransform: () => ({ current: -100 }),
+    useReducedMotion: () => false,
+    motionValue: (init = 0) => ({ value: init, set: vi.fn() }),
+  }
+})
+
 // ─── Cursor system mocks ───────────────────────────────────────────────────────
 // CustomCursor / CursorParticles / CursorLabel are mounted in App.tsx.
 // Returning null prevents them from mounting framer-motion / Zustand hooks in tests,

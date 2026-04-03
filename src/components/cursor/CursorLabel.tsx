@@ -18,10 +18,6 @@ export function CursorLabel() {
   const isHovering = useCursorStore((s) => s.isHovering)
   const label = useCursorStore((s) => s.label)
 
-  const isActive =
-    document.documentElement.getAttribute('data-cursor-active') === 'true'
-  if (!isActive) return null
-
   const displayText = label || LABEL_MAP[cursorType] || ''
   const visible = isHovering && displayText !== ''
 

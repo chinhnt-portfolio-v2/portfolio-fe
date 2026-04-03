@@ -41,6 +41,7 @@ vi.mock('framer-motion', () => {
       return motionValues.x
     }),
     useSpring: vi.fn((mv: { value: number; set: () => void }) => mv),
+    motionValue: (v = 0) => ({ value: v, set: vi.fn() }),
     MotionConfig: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   }
 })

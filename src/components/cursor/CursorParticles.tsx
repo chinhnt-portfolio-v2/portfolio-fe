@@ -13,8 +13,7 @@ import { useCursorStore } from '@/stores/cursorStore'
 export function CursorParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { spawnParticles } = useCursorParticles(canvasRef)
-  const isActive =
-    document.documentElement.getAttribute('data-cursor-active') === 'true'
+  const isActive = true
 
   // Resize canvas to fill viewport
   useEffect(() => {
@@ -44,9 +43,7 @@ export function CursorParticles() {
     )
 
     return unsub
-  }, [isActive, spawnParticles])
-
-  if (!isActive) return null
+  }, [spawnParticles])
 
   return (
     <canvas

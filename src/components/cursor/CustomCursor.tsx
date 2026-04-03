@@ -1,11 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
-
-import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion'
+import { motion, useSpring } from 'framer-motion'
 
 import { SPRING_GENTLE } from '@/constants/motion'
-import { useCursorStore } from '@/stores/cursorStore'
+import { useCursorStore, cursorX, cursorY } from '@/stores/cursorStore'
 
 /** Base ring / dot sizes in pixels */
 const RING_SIZE = 32
@@ -13,44 +11,25 @@ const RING_HOVER_SIZE = 56
 const DOT_SIZE = 8
 
 export function CustomCursor() {
-  const prefersReduced = useReducedMotion()
+  // cursorX/Y are module-level MotionValues — updated by useCustomCursor on every mousemove.
+  // useSpring wraps them for interpolation (ring lag). No Zustand subscription for x/y.
+  const ringSpringX = useSpring(cursorX, { stiffness: 120, damping: 20 })
+  const ringSpringY = useSpring(cursorY, { stiffness: 120, damping: 20 })
 
-  // MotionValues — read from Zustand store, never trigger React re-renders
-  const x = useMotionValue(-100)
-  const y = useMotionValue(-100)
-
-  // Subscribe to Zustand x/y changes and push into MotionValues.
-  // `.set()` on MotionValues is NOT React setState — Framer Motion handles interpolation.
-  // x/y in deps: effect re-runs when motion values change identity, which is fine.
-  useEffect(() => {
-    const unsub = useCursorStore.subscribe((state) => {
-      x.set(state.x)
-      y.set(state.y)
-    })
-    return unsub
-  }, [x, y])
-
+  // Zustand: only for UI state that needs React re-renders
   const cursorType = useCursorStore((s) => s.cursorType)
   const isHovering = useCursorStore((s) => s.isHovering)
   const isClicking = useCursorStore((s) => s.isClicking)
 
-  // Springs — take raw MotionValues, produce interpolated ones
-  const ringSpringX = useSpring(x, { stiffness: 120, damping: 20 })
-  const ringSpringY = useSpring(y, { stiffness: 120, damping: 20 })
-  const dotSpringX = useSpring(x, { stiffness: 400, damping: 25 })
-  const dotSpringY = useSpring(y, { stiffness: 400, damping: 25 })
-
   // Trail springs: decreasing stiffness → more lag toward the tail
   const trailStiffness = [200, 180, 160, 140] as const
   // eslint-disable-next-line react-hooks/rules-of-hooks -- intentional: constant-length array from known values
-  const trailSpringsX = trailStiffness.map((s) => useSpring(x, { stiffness: s, damping: 20 }))
+  const trailSpringsX = trailStiffness.map((s) => useSpring(cursorX, { stiffness: s, damping: 20 }))
   // eslint-disable-next-line react-hooks/rules-of-hooks -- intentional: constant-length array from known values
-  const trailSpringsY = trailStiffness.map((s) => useSpring(y, { stiffness: s, damping: 20 }))
+  const trailSpringsY = trailStiffness.map((s) => useSpring(cursorY, { stiffness: s, damping: 20 }))
 
   const dotSize = DOT_SIZE
   const trailSize = DOT_SIZE * 0.75
-
-  if (prefersReduced) return null
 
   return (
     <>
@@ -74,13 +53,13 @@ export function CustomCursor() {
         transition={SPRING_GENTLE}
       />
 
-      {/* Inner dot */}
+      {/* Inner dot — uses raw cursorX/Y for zero-lag tracking */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed z-[10000] flex items-center justify-center will-change-transform rounded-full bg-brand"
         style={{
-          x: dotSpringX,
-          y: dotSpringY,
+          x: cursorX,
+          y: cursorY,
           width: dotSize,
           height: dotSize,
           translateX: '-50%',
