@@ -11,6 +11,7 @@ import type { ProjectProofPoint } from '@/config/projects'
 import { SPRING_GENTLE } from '@/constants/motion'
 import { formatRelativeTime } from '@/lib/formatDate'
 import { cn } from '@/lib/utils'
+import { useCursorStore } from '@/stores/cursorStore'
 import { useMetricsStore } from '@/stores/metricsStore'
 import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
 
@@ -62,6 +63,7 @@ export function ProjectCard({
 
   const projectStatus = getProjectStatus(slug)
   const { t } = useTranslation()
+  const { setCursorType, setLabel } = useCursorStore()
 
   // Handle card click - track as last viewed project
   const handleCardClick = () => {
@@ -84,6 +86,8 @@ export function ProjectCard({
       transition={{ ...SPRING_GENTLE, delay: index * 0.05 }}
       whileHover={{ y: -2, transition: SPRING_GENTLE }}
       onClick={handleCardClick}
+      onMouseEnter={() => { setCursorType('project'); setLabel('View →'); }}
+      onMouseLeave={() => { setCursorType('default'); setLabel(''); }}
       className={cn(
         'group relative flex cursor-pointer flex-col rounded-2xl border border-white/10 bg-bg-card p-7',
         'shadow-[0_0_0px_rgba(168,85,247,0)] transition-shadow duration-200',
@@ -180,6 +184,8 @@ export function ProjectCard({
             className="text-muted-foreground hover:text-foreground transition-colors focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none rounded-sm"
             aria-label={`${t('projects.viewLiveDemo')} ${title}`}
             onClick={e => e.stopPropagation()}
+            onMouseEnter={() => { setCursorType('external'); setLabel('Open ↗'); }}
+            onMouseLeave={() => { setCursorType('default'); setLabel(''); }}
           >
             <ExternalLink size={14} />
           </a>
@@ -192,6 +198,8 @@ export function ProjectCard({
             className="text-muted-foreground hover:text-foreground transition-colors focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none rounded-sm"
             aria-label={`${t('projects.viewSourceCode')} ${title}`}
             onClick={e => e.stopPropagation()}
+            onMouseEnter={() => { setCursorType('external'); setLabel('Open ↗'); }}
+            onMouseLeave={() => { setCursorType('default'); setLabel(''); }}
           >
             <Github size={14} />
           </a>

@@ -46,3 +46,18 @@ vi.mock('react-i18next', async (importOriginal) => {
     },
   }
 })
+
+// ─── Cursor system mocks ───────────────────────────────────────────────────────
+// CustomCursor / CursorParticles / CursorLabel are mounted in App.tsx.
+// Returning null prevents them from mounting framer-motion / Zustand hooks in tests,
+// which would cause act() warnings. The cursor components themselves are tested
+// in their own dedicated test files with proper isolated mocks.
+vi.mock('@/components/cursor/CustomCursor', () => ({
+  CustomCursor: () => null,
+}))
+vi.mock('@/components/cursor/CursorParticles', () => ({
+  CursorParticles: () => null,
+}))
+vi.mock('@/components/cursor/CursorLabel', () => ({
+  CursorLabel: () => null,
+}))

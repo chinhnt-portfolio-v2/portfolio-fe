@@ -50,6 +50,23 @@
   --spring-snappy-damping: 25;
   --spring-bouncy-stiffness: 200;
   --spring-bouncy-damping: 15;
+
+  /* Custom cursor tokens */
+  --cursor-ring-size: 32px;
+  --cursor-ring-hover-size: 56px;
+  --cursor-dot-size: 8px;
+  --cursor-ring-z: 9999;
+  --cursor-dot-z: 10000;
+  --cursor-label-z: 10001;
+  --cursor-particle-z: 9998;
+
+  /* Cursor system — Neural Pulse: indigo in light mode, purple in dark mode */
+  --color-cursor-light: #6366f1;
+  --color-cursor-glow-light: #818cf8;
+  --color-cursor-trail-light: #a78bfa;
+  --color-cursor-dark: #a855f7;
+  --color-cursor-glow-dark: #c084fc;
+  --color-cursor-trail-dark: #e879f9;
 }
 
 @theme inline {
@@ -139,6 +156,10 @@
   --color-bg-card: #111118;
   --color-bg-elevated: #18181F;
   --color-bg-overlay: #1E1E28;
+  /* Cursor system — Neural Pulse dark mode overrides (purple shifted) */
+  --color-cursor-light: #a855f7;
+  --color-cursor-glow-light: #c084fc;
+  --color-cursor-trail-light: #e879f9;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -181,6 +202,14 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    cursor: none;
+  }
+
+  /* Custom cursor is hidden on touch devices or when data-cursor-active != "true" */
+  @media (pointer: coarse) {
+    body {
+      cursor: auto;
+    }
   }
   code, pre, kbd {
     font-family: var(--font-mono);

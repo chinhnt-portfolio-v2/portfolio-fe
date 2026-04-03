@@ -3,7 +3,11 @@ import { lazy, Suspense, useEffect } from 'react'
 import { AnimatePresence, MotionConfig } from 'framer-motion'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
+import { CursorLabel } from '@/components/cursor/CursorLabel'
+import { CursorParticles } from '@/components/cursor/CursorParticles'
+import { CustomCursor } from '@/components/cursor/CustomCursor'
 import { PageTransition } from '@/components/layout/PageTransition'
+import { useCustomCursor } from '@/hooks/use-custom-cursor'
 import { useWebSocket } from '@/hooks/useWebSocket'
 import i18n from '@/i18n'
 import { detectInitialLanguage } from '@/lib/referral'
@@ -114,6 +118,9 @@ export default function App() {
     document.documentElement.classList.toggle('dark', theme === 'dark')
   }, [theme])
 
+  // Activate custom cursor system (hook handles touch-device guard internally)
+  useCustomCursor()
+
   // Initialize language on mount and subscribe to future store changes
   useEffect(() => {
     const lang = detectInitialLanguage(window.location.search)
@@ -131,6 +138,10 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
+      {/* Custom cursor system — always mounted so components can use it */}
+      <CustomCursor />
+      <CursorParticles />
+      <CursorLabel />
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>

@@ -8,6 +8,7 @@ import { EyebrowChip } from '@/components/shared/EyebrowChip'
 import { HeroCardStack } from '@/components/shared/HeroCardStack'
 import { WelcomeBackBanner } from '@/components/shared/WelcomeBackBanner'
 import { SPRING_GENTLE } from '@/constants/motion'
+import { useCursorStore } from '@/stores/cursorStore'
 import { useReferralStore } from '@/stores/referralStore'
 import { useReturnVisitorStore } from '@/stores/returnVisitorStore'
 
@@ -52,6 +53,7 @@ export function Hero() {
   const { t } = useTranslation()
   const referralSource = useReferralStore((state) => state.referralSource)
   const { lastViewedSlug, _hasHydrated } = useReturnVisitorStore()
+  const { setCursorType, setLabel } = useCursorStore()
 
   // Skip hero animation for returning visitors
   // Also skip if the store hasn't hydrated yet to avoid hydration mismatch
@@ -120,12 +122,16 @@ export function Hero() {
               <div className="flex flex-wrap items-center gap-3.5">
                 <a
                   href="#projects"
+                  onMouseEnter={() => { setCursorType('pointer'); setLabel('Explore →'); }}
+                  onMouseLeave={() => { setCursorType('default'); setLabel(''); }}
                   className="inline-flex items-center rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-brand-glow transition-shadow hover:shadow-brand-glow-hover focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
                 >
                   {t('hero.cta.evidence')}
                 </a>
                 <a
                   href="#contact"
+                  onMouseEnter={() => { setCursorType('pointer'); setLabel('Say Hi →'); }}
+                  onMouseLeave={() => { setCursorType('default'); setLabel(''); }}
                   className="inline-flex items-center rounded-lg border border-border bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
                 >
                   {t('hero.cta.contact')}

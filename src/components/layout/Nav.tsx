@@ -4,7 +4,9 @@ import { Menu, Moon, Sun } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { MobileSheet } from './MobileSheet'
+import { MagneticWrapper } from '@/components/cursor/MagneticWrapper'
 import { Button } from '@/components/ui/button'
+import { useCursorStore } from '@/stores/cursorStore'
 import { useLanguageStore } from '@/stores/languageStore'
 import { useThemeStore } from '@/stores/themeStore'
 
@@ -73,6 +75,7 @@ function scrollToSection(sectionId: string) {
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { t } = useTranslation()
+  const { setCursorType } = useCursorStore()
 
   const navItems = NAV_LINK_DEFS.map((link) => ({
     sectionId: link.sectionId,
@@ -106,13 +109,17 @@ export function Nav() {
         <ul className="hidden items-center gap-7 md:flex" role="list">
           {navItems.map((item) => (
             <li key={item.sectionId}>
-              <button
-                type="button"
-                onClick={() => scrollToSection(item.sectionId)}
-                className="cursor-pointer rounded-sm border-none bg-transparent p-0 text-[var(--text-small)] text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
-              >
-                {item.label}
-              </button>
+              <MagneticWrapper>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection(item.sectionId)}
+                  onMouseEnter={() => { setCursorType('pointer'); }}
+                  onMouseLeave={() => setCursorType('default')}
+                  className="cursor-pointer rounded-sm border-none bg-transparent p-0 text-[var(--text-small)] text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-brand-light focus-visible:ring-offset-2 focus-visible:outline-none"
+                >
+                  {item.label}
+                </button>
+              </MagneticWrapper>
             </li>
           ))}
         </ul>

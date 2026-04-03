@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import type { ContactFormData } from '@/lib/validators'
 import { contactFormSchema } from '@/lib/validators'
+import { useCursorStore } from '@/stores/cursorStore'
 
 interface ContactFormProps {
   className?: string
@@ -35,6 +36,7 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
 
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const { setCursorType, setLabel } = useCursorStore()
 
   const onSubmit = async (data: ContactFormData) => {
     setErrorMessage(null)
@@ -183,6 +185,8 @@ export function ContactForm({ className, referralSource }: ContactFormProps) {
         type="submit"
         disabled={isSubmitting}
         className="w-full min-h-[44px]"
+        onMouseEnter={() => { setCursorType('pointer'); setLabel('Send →'); }}
+        onMouseLeave={() => { setCursorType('default'); setLabel(''); }}
       >
         {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
       </Button>

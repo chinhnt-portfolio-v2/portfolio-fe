@@ -22,19 +22,39 @@ vi.mock('@/stores/returnVisitorStore', () => ({
 
 // Mock framer-motion for HomePage integration tests
 type MotionProps = Record<string, unknown> & { children?: React.ReactNode; className?: string }
-function stripMotionProps({ children, className, initial: _i, animate: _a, exit: _e, transition: _t, whileHover: _wh, ...rest }: MotionProps) {
+function stripMotionProps({ children, className, initial: _i, animate: _a, exit: _e, transition: _t, whileHover: _wh, onMouseMove: _mm, onMouseLeave: _ml, style: _s, ...rest }: MotionProps) {
   return { children, className, ...rest }
 }
 
-vi.mock('framer-motion', () => ({
-  motion: {
-    div: (props: MotionProps) => <div {...stripMotionProps(props)} />,
-    article: (props: MotionProps) => <article {...stripMotionProps(props)} />,
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-  useInView: () => true,
-  useReducedMotion: () => false,
-  MotionConfig: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+vi.mock('framer-motion', () => {
+  const motionValues = { x: { value: 0, set: vi.fn() }, y: { value: 0, set: vi.fn() } }
+  return {
+    motion: {
+      div: (props: MotionProps) => <div {...stripMotionProps(props)} />,
+      article: (props: MotionProps) => <article {...stripMotionProps(props)} />,
+    },
+    AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+    useInView: () => true,
+    useReducedMotion: () => false,
+    useMotionValue: vi.fn((init?: number) => {
+      if (init !== undefined) return { value: init, set: vi.fn() }
+      return motionValues.x
+    }),
+    useSpring: vi.fn((mv: { value: number; set: () => void }) => mv),
+    MotionConfig: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  }
+})
+
+vi.mock('@/components/cursor/MagneticWrapper', () => ({
+  MagneticWrapper: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}))
+
+vi.mock('@/hooks/use-custom-cursor', () => ({
+  useCustomCursor: vi.fn(() => ({
+    x: { value: 0, set: vi.fn() },
+    y: { value: 0, set: vi.fn() },
+    isClicking: { value: false, set: vi.fn() },
+  })),
 }))
 
 describe('HomePage', () => {
