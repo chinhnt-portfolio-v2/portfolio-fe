@@ -80,7 +80,7 @@
       "timeline": {
         "m1": { "title": "First Commit", "description": "Wallet app project born — 26 Mar 2026" },
         "m2": { "title": "Backend Deploy", "description": "Spring Boot BE deployed on GCP Cloud Run" },
-        "m3": { "title": "Production Deploy", "description": "Live at wallet-fe-two.vercel.app — 1 Apr 2026" }
+        "m3": { "title": "Production Deploy", "description": "Live at wallet.chinhnt.xyz — 1 Apr 2026" }
       }
     },
     "portfolio-v2": {
@@ -89,7 +89,7 @@
       "lessonsLearned": "BMAD agent orchestration for spec → implementation → tests is a game changer for solo developers. The test coverage is higher in 13 days than most teams achieve in 3 months.",
       "timeline": {
         "m1": { "title": "First Commit", "description": "Project scaffolded with BMAD agent orchestration" },
-        "m2": { "title": "Production Deploy", "description": "Live at chinhnt-portfolio.vercel.app — CI/CD automated, tests green" }
+        "m2": { "title": "Production Deploy", "description": "Live at portfolio.chinhnt.xyz — CI/CD automated, tests green" }
       }
     },
     "sapo-social-mobile": {

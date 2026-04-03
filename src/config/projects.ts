@@ -150,9 +150,9 @@ export const projects: Project[] = [
     description: '', // i18n: projects.wallet-app.description
     techStack: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'JWT', 'OAuth2'],
     tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'JWT', 'OAuth2'],
-    demoUrl: 'https://wallet-fe-two.vercel.app',
+    demoUrl: 'https://wallet.chinhnt.xyz',
     repoUrl: 'https://github.com/chinhnt-portfolio-v2/wallet-fe',
-    liveUrl: 'https://wallet-fe-two.vercel.app',
+    liveUrl: 'https://wallet.chinhnt.xyz',
     githubUrl: 'https://github.com/chinhnt-portfolio-v2/wallet-fe',
     artistStatement: '', // i18n: projects.wallet-app.artistStatement
     timeline: {
@@ -171,7 +171,7 @@ export const projects: Project[] = [
     proofPoints: [
       { icon: '🔐', text: 'JWT + OAuth2' },
       { icon: '🔄', text: 'Token refresh flow' },
-      { icon: '💰', text: 'Live at wallet-fe' },
+      { icon: '💰', text: 'Live at wallet.chinhnt.xyz' },
     ],
   },
 
@@ -185,7 +185,7 @@ export const projects: Project[] = [
     tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'WebSocket', 'GitHub Actions'],
     demoUrl: null,
     repoUrl: 'https://github.com/chinhnt-portfolio-v2/portfolio-fe',
-    liveUrl: 'https://chinhnt-portfolio.vercel.app',
+    liveUrl: 'https://portfolio.chinhnt.xyz',
     githubUrl: 'https://github.com/chinhnt-portfolio-v2/portfolio-fe',
     artistStatement: '', // i18n: projects.portfolio-v2.artistStatement
     timeline: {

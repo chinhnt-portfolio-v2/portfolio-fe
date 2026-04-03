@@ -84,7 +84,7 @@ describe('ProjectDetailPage', () => {
     renderWithRouter('portfolio-v2')
     const liveLink = screen.getByRole('link', { name: /view live/i })
     expect(liveLink).toBeInTheDocument()
-    expect(liveLink).toHaveAttribute('href', 'https://chinhnt-portfolio.vercel.app')
+    expect(liveLink).toHaveAttribute('href', 'https://portfolio.chinhnt.xyz')
   })
 
   it('renders GitHub link with correct attributes', () => {
