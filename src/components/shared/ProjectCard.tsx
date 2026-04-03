@@ -23,7 +23,8 @@ interface ProjectCardProps {
   tags: string[]
   metrics?: {
     shipDays?: number
-    uptimeDays?: number
+    /** ISO date (YYYY-MM-DD) — uptime days are computed dynamically from today */
+    launchDate?: string
   }
   featured?: boolean
   liveUrl?: string
@@ -125,15 +126,16 @@ export function ProjectCard({
         </div>
       )}
 
-      {/* Metrics row - static metrics */}
-      {(metrics?.shipDays !== undefined || metrics?.uptimeDays !== undefined) && (
+      {/* Metrics row — shipDays + uptimeDays (computed from launchDate) */}
+      {(metrics?.shipDays !== undefined || metrics?.launchDate !== undefined) && (
         <div className="mb-4 flex gap-6">
           {metrics.shipDays !== undefined && (
             <MetricPair value={metrics.shipDays} label={t('projects.daysToShip')} />
           )}
-          {metrics.uptimeDays !== undefined && (
-            <MetricPair value={metrics.uptimeDays} label={t('projects.daysUptime')} />
-          )}
+          {metrics.launchDate !== undefined && (() => {
+            const days = Math.floor((Date.now() - new Date(metrics.launchDate!).getTime()) / 86_400_000)
+            return <MetricPair value={days} label={t('projects.daysUptime')} />
+          })()}
         </div>
       )}
 

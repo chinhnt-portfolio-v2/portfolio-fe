@@ -27,7 +27,8 @@ export type ProjectAvailability = 'available' | 'not-available' | 'open-to-roles
 
 export interface ProjectMetrics {
   shipDays?: number
-  uptimeDays?: number
+  /** ISO date (YYYY-MM-DD) of production launch — used to compute uptimeDays dynamically */
+  launchDate?: string
 }
 
 export interface ProjectProofPoint {
@@ -166,7 +167,7 @@ export const projects: Project[] = [
     availability: 'available',
     status: 'live',
     featured: true,
-    metrics: { shipDays: 6, uptimeDays: 0 },
+    metrics: { shipDays: 6, launchDate: '2026-04-02' },
     lessonsLearned: '', // i18n: projects.wallet-app.lessonsLearned
     proofPoints: [
       { icon: '🔐', text: 'JWT + OAuth2' },
@@ -175,11 +176,11 @@ export const projects: Project[] = [
     ],
   },
 
-  // 4. portfolio-v2 — live, featured
+  // 4. Portfolio — live, featured
   {
     slug: 'portfolio-v2',
-    name: 'Portfolio v2',
-    title: 'Portfolio v2',
+    name: 'Portfolio',
+    title: 'Portfolio',
     description: '', // i18n: projects.portfolio-v2.description
     techStack: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'WebSocket', 'GitHub Actions'],
     tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'WebSocket', 'GitHub Actions'],
@@ -198,7 +199,7 @@ export const projects: Project[] = [
     availability: 'open-to-roles',
     status: 'live',
     featured: true,
-    metrics: { shipDays: 13, uptimeDays: 7 },
+    metrics: { shipDays: 13, launchDate: '2026-03-25' },
     lessonsLearned: '', // i18n: projects.portfolio-v2.lessonsLearned
     proofPoints: [
       { icon: '🤖', text: 'AI-augmented SDLC' },
