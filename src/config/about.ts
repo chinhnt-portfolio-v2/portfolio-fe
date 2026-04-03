@@ -20,9 +20,9 @@ export interface HeroStat {
 export const HERO_STATS: HeroStat[] = [
   {
     icon: '🏗️',
-    label: '3 yrs',
+    label: '4 yrs',
     sublabel: '@ Sapo Technology',
-    tooltip: 'Fullstack Developer 2022–2025: Social Channel, Facebook Shopping, Mobile',
+    tooltip: 'Fullstack Developer 2022–2026: Social Channel, Facebook Shopping, Mobile',
   },
   {
     icon: '⚡',
