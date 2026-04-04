@@ -92,6 +92,33 @@
         "m2": { "title": "Production Deploy", "description": "Live at portfolio.chinhnt.xyz — CI/CD automated, tests green" }
       }
     },
+    "ledger-app": {
+      "description": "Track daily expenses across multiple wallets with income/expense categories, monthly summaries, and budget alerts — deployed in 2 days.",
+      "artistStatement": "Three demo apps, three days, one shared auth system. The ledger app showcases clean data visualisation with Recharts and spring physics animations that feel natural on any device.",
+      "lessonsLearned": "Keeping the BE module pattern identical across wallet, ledger, and vault made the FE integration nearly frictionless — consistency in architecture pays dividends at integration time.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "Ledger app project born — 3 Apr 2026" },
+        "m2": { "title": "Production Deploy", "description": "Live at ledger.chinhnt.xyz — 4 Apr 2026" }
+      }
+    },
+    "vault-app": {
+      "description": "Bookmark vault with auto URL metadata fetch, tag cloud, folder organisation, and shareable collections — deployed in 2 days.",
+      "artistStatement": "The vault app demonstrates full-stack URL scraping, PostgreSQL array columns for tags, and a clean search UX that makes bookmark management feel effortless.",
+      "lessonsLearned": "PostgreSQL TEXT[] for tags with GIN indexes made fuzzy search fast without a separate search engine. Always check what the database can already do before reaching for Elasticsearch.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "Vault app project born — 3 Apr 2026" },
+        "m2": { "title": "Production Deploy", "description": "Live at vault.chinhnt.xyz — 4 Apr 2026" }
+      }
+    },
+    "codebin-app": {
+      "description": "Code paste bin with syntax highlighting for 50+ languages, optional expiry and password protection — deployed in 2 days.",
+      "artistStatement": "CodeBin shows anonymous paste support with nullable user IDs, SHA-256 password hashing, and a scheduled cleanup job — all built on the same shared auth platform as the other demo apps.",
+      "lessonsLearned": "Nullable user_id in the paste table required careful handling of authorisation — unauthenticated users can view/unlock, but only the owner can delete. NULL-safe queries are essential here.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "CodeBin project born — 3 Apr 2026" },
+        "m2": { "title": "Production Deploy", "description": "Live at codebin.chinhnt.xyz — 4 Apr 2026" }
+      }
+    },
     "sapo-social-mobile": {
       "description": "React Native mobile app for Sapo Social — responding to messages on the go.",
       "artistStatement": "Mobile was never my comfort zone. React Native forced me to think in components, not pages. Shipped the message reply UI with offline-first caching so sellers never miss an inquiry.",

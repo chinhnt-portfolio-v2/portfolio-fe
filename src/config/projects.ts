@@ -167,7 +167,7 @@ export const projects: Project[] = [
     availability: 'available',
     status: 'live',
     featured: true,
-    metrics: { shipDays: 6, launchDate: '2026-04-02' },
+    metrics: { shipDays: 6, launchDate: '2026-04-01' },
     lessonsLearned: '', // i18n: projects.wallet-app.lessonsLearned
     proofPoints: [
       { icon: '🔐', text: 'JWT + OAuth2' },
@@ -176,7 +176,103 @@ export const projects: Project[] = [
     ],
   },
 
-  // 4. Portfolio — live, featured
+  // 4. ledger-app — live, featured
+  {
+    slug: 'ledger-app',
+    name: 'Expense Ledger',
+    title: 'Expense Ledger',
+    description: '', // i18n: projects.ledger-app.description
+    techStack: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'TanStack Query', 'Zustand', 'Recharts'],
+    tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'TanStack Query', 'Zustand', 'Recharts'],
+    demoUrl: 'https://ledger.chinhnt.xyz',
+    repoUrl: 'https://github.com/chinhnt-portfolio-v2/ledger-fe',
+    liveUrl: 'https://ledger.chinhnt.xyz',
+    githubUrl: 'https://github.com/chinhnt-portfolio-v2/ledger-fe',
+    artistStatement: '', // i18n: projects.ledger-app.artistStatement
+    timeline: {
+      milestones: [
+        { date: '2026-04-03', key: 'm1' },
+        { date: '2026-04-04', key: 'm2' },
+      ],
+    },
+    hasBuildStory: false,
+    availability: 'available',
+    status: 'live',
+    featured: true,
+    metrics: { shipDays: 2, launchDate: '2026-04-04' },
+    lessonsLearned: '', // i18n: projects.ledger-app.lessonsLearned
+    proofPoints: [
+      { icon: '📊', text: 'Monthly breakdowns' },
+      { icon: '💰', text: 'Multi-wallet tracking' },
+      { icon: '🔐', text: 'JWT + OAuth2 auth' },
+    ],
+  },
+
+  // 5. vault-app — live, featured
+  {
+    slug: 'vault-app',
+    name: 'Bookmark Vault',
+    title: 'Bookmark Vault',
+    description: '', // i18n: projects.vault-app.description
+    techStack: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'TanStack Query', 'Zustand', 'Framer Motion'],
+    tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'TanStack Query', 'Zustand', 'Framer Motion'],
+    demoUrl: 'https://vault.chinhnt.xyz',
+    repoUrl: 'https://github.com/chinhnt-portfolio-v2/vault-fe',
+    liveUrl: 'https://vault.chinhnt.xyz',
+    githubUrl: 'https://github.com/chinhnt-portfolio-v2/vault-fe',
+    artistStatement: '', // i18n: projects.vault-app.artistStatement
+    timeline: {
+      milestones: [
+        { date: '2026-04-03', key: 'm1' },
+        { date: '2026-04-04', key: 'm2' },
+      ],
+    },
+    hasBuildStory: false,
+    availability: 'available',
+    status: 'live',
+    featured: true,
+    metrics: { shipDays: 2, launchDate: '2026-04-04' },
+    lessonsLearned: '', // i18n: projects.vault-app.lessonsLearned
+    proofPoints: [
+      { icon: '🔖', text: 'URL metadata auto-fetch' },
+      { icon: '🏷️', text: 'Tag cloud & folders' },
+      { icon: '🔐', text: 'JWT + OAuth2 auth' },
+    ],
+  },
+
+  // 6. codebin-app — live, featured
+  {
+    slug: 'codebin-app',
+    name: 'CodeBin',
+    title: 'CodeBin',
+    description: '', // i18n: projects.codebin-app.description
+    techStack: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'TanStack Query', 'Zustand', 'highlight.js'],
+    tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'TanStack Query', 'Zustand', 'highlight.js'],
+    demoUrl: 'https://codebin.chinhnt.xyz',
+    repoUrl: 'https://github.com/chinhnt-portfolio-v2/codebin-fe',
+    liveUrl: 'https://codebin.chinhnt.xyz',
+    githubUrl: 'https://github.com/chinhnt-portfolio-v2/codebin-fe',
+    artistStatement: '', // i18n: projects.codebin-app.artistStatement
+    timeline: {
+      milestones: [
+        { date: '2026-04-03', key: 'm1' },
+        { date: '2026-04-04', key: 'm2' },
+      ],
+    },
+    hasBuildStory: false,
+    availability: 'available',
+    status: 'live',
+    featured: true,
+    metrics: { shipDays: 2, launchDate: '2026-04-04' },
+    lessonsLearned: '', // i18n: projects.codebin-app.lessonsLearned
+    proofPoints: [
+      { icon: '🎨', text: '50+ language highlighting' },
+      { icon: '🔗', text: 'Shareable links' },
+      { icon: '🔐', text: 'Password protection' },
+    ],
+  },
+
+  // 7. Portfolio — live, featured
   {
     slug: 'portfolio-v2',
     name: 'Portfolio',
@@ -208,7 +304,7 @@ export const projects: Project[] = [
     ],
   },
 
-  // 5. sapo-social-mobile — live-product, not featured
+  // 8. sapo-social-mobile — live-product, not featured
   {
     slug: 'sapo-social-mobile',
     name: 'Sapo Social Mobile',
@@ -239,7 +335,7 @@ export const projects: Project[] = [
     ],
   },
 
-  // 6. hospital-website — live-product, not featured
+  // 9. hospital-website — live-product, not featured
   {
     slug: 'hospital-website',
     name: 'Hospital Website Application',

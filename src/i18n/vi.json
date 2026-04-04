@@ -92,6 +92,33 @@
         "m2": { "title": "Production Deploy", "description": "Live tại portfolio.chinhnt.xyz — CI/CD tự động, tests green" }
       }
     },
+    "ledger-app": {
+      "description": "Theo dõi chi tiêu hàng ngày qua nhiều ví, phân loại thu/chi, tổng hợp tháng, cảnh báo ngân sách — deploy trong 2 ngày.",
+      "artistStatement": "Ba demo app, ba ngày, một hệ thống auth chia sẻ. Ledger app thể hiện data visualisation mượt mà với Recharts và spring physics animations.",
+      "lessonsLearned": "Giữ pattern BE module giống hệt nhau giữa wallet, ledger, và vault giúp FE integration gần như không ma sát — tính nhất quán trong architecture mang lại lợi ích lớn khi integrate.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "Ledger app project born — 3 Apr 2026" },
+        "m2": { "title": "Production Deploy", "description": "Live tại ledger.chinhnt.xyz — 4 Apr 2026" }
+      }
+    },
+    "vault-app": {
+      "description": "Bookmark vault với tự động fetch URL metadata, tag cloud, tổ chức theo thư mục, và collection có thể chia sẻ — deploy trong 2 ngày.",
+      "artistStatement": "Vault app thể hiện full-stack URL scraping, PostgreSQL array columns cho tags, và UX search sạch sẽ giúp quản lý bookmark không phức tạp.",
+      "lessonsLearned": "PostgreSQL TEXT[] cho tags với GIN indexes giúp fuzzy search nhanh mà không cần search engine riêng. Luôn kiểm tra database đã hỗ trợ gì trước khi dùng Elasticsearch.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "Vault app project born — 3 Apr 2026" },
+        "m2": { "title": "Production Deploy", "description": "Live tại vault.chinhnt.xyz — 4 Apr 2026" }
+      }
+    },
+    "codebin-app": {
+      "description": "Code paste bin với syntax highlighting cho 50+ ngôn ngữ, optional expiry và password protection — deploy trong 2 ngày.",
+      "artistStatement": "CodeBin thể hiện anonymous paste support với nullable user IDs, SHA-256 password hashing, và scheduled cleanup job — tất cả xây trên cùng auth platform chia sẻ.",
+      "lessonsLearned": "Nullable user_id trong paste table yêu cầu xử lý cẩn thận authorization — unauthenticated users có thể view/unlock, nhưng chỉ owner mới được delete. NULL-safe queries là thiết yếu.",
+      "timeline": {
+        "m1": { "title": "First Commit", "description": "CodeBin project born — 3 Apr 2026" },
+        "m2": { "title": "Production Deploy", "description": "Live tại codebin.chinhnt.xyz — 4 Apr 2026" }
+      }
+    },
     "sapo-social-mobile": {
       "description": "Ứng dụng React Native cho Sapo Social — trả lời tin nhắn mọi lúc mọi nơi.",
       "artistStatement": "Mobile không bao giờ là vùng thoải mái của tôi. React Native buộc tôi phải nghĩ bằng components, không phải pages. Đã ship message reply UI với offline-first caching để seller không bao giờ miss một inquiry.",
